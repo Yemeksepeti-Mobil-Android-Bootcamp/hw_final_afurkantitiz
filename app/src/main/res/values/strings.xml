@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">FoodApp</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="first_onboard_image">First Onboard Image</string>
+    <string name="find_your_comfort">Find your Comfort</string>
+    <string name="food_here">Food here</string>
+    <string name="here_you_can_find_a_chef_or_dish_for_every_ntaste_and_color_enjoy">Here You Can find a chef or dish for every\ntaste and color. Enjoy!</string>
+    <string name="next">Next</string>
+    <string name="second_onboard_image">Second Onboard Image</string>
+    <string name="food_ninja_is_where_your">Food Ninja is Where Your</string>
+    <string name="comfort_food_lives">Comfort Food Lives</string>
+    <string name="enjoy_a_fast_and_smooth_food_delivery_at_nyour_doorstep">Enjoy a fast and smooth food delivery at\nyour doorstep</string>
+    <string name="get_started">Get Started</string>
+    <string name="error_image">Error Image</string>
+    <string name="we_encountered_a_problem">We encountered a problem</string>
 </resources>
