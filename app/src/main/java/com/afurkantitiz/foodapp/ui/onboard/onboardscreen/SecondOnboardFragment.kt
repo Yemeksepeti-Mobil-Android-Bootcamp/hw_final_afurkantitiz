@@ -31,7 +31,7 @@ class SecondOnboardFragment : Fragment() {
 
     private fun viewPagerControlForButton() {
         binding.secondOnboardFinishButton.setOnClickListener {
-            findNavController().navigate(R.id.onboard_to_signin)
+            findNavController().navigate(R.id.action_onboardFragment_to_signInFragment)
         }
     }
 

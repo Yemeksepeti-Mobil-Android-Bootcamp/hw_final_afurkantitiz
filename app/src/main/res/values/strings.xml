@@ -13,4 +13,16 @@
     <string name="get_started">Get Started</string>
     <string name="error_image">Error Image</string>
     <string name="we_encountered_a_problem">We encountered a problem</string>
+    <string name="sign_up_image">Sign Up Image</string>
+    <string name="sign_up_for_free">Sign Up For Free</string>
+    <string name="name">Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="you_have_a_account_go_to_sign_in">You have a account? Go to Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_in_image">Sign In Image</string>
+    <string name="login_to_your_account">Login To Your Account</string>
+    <string name="forgot_your_password">Forgot Your Password?</string>
+    <string name="don_t_have_a_account_go_to_sign_up">Don\'t have a account ? Go to Sign Up</string>
 </resources>

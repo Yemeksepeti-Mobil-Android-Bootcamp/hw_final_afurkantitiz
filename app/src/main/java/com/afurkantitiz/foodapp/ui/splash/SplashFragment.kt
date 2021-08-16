@@ -40,9 +40,9 @@ class SplashFragment : Fragment() {
 
             override fun onAnimationEnd(animation: Animator?) {
                 if (isOnboardShowed()){
-                    findNavController().navigate(R.id.splash_to_signin)
+                    findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
                 }else {
-                    findNavController().navigate(R.id.splash_to_onboard)
+                    findNavController().navigate(R.id.action_splashFragment_to_onboardFragment)
                 }
             }
 

@@ -11,15 +11,11 @@
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
-            android:id="@+id/splash_to_onboard"
-            app:destination="@id/onboardFragment"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_splashFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
         <action
-            android:id="@+id/splash_to_signin"
-            app:destination="@id/signInFragment"
-            app:popUpTo="@id/splashFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_splashFragment_to_onboardFragment"
+            app:destination="@id/onboardFragment" />
     </fragment>
     <fragment
         android:id="@+id/onboardFragment"
@@ -27,14 +23,25 @@
         android:label="fragment_onboard"
         tools:layout="@layout/fragment_onboard" >
         <action
-            android:id="@+id/onboard_to_signin"
-            app:destination="@id/signInFragment"
-            app:popUpTo="@id/onboardFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_onboardFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.afurkantitiz.foodapp.ui.authentication.signin.SignInFragment"
         android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" />
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.afurkantitiz.foodapp.ui.authentication.signup.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 </navigation>
