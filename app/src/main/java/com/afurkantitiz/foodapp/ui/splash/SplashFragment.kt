@@ -2,6 +2,7 @@ package com.afurkantitiz.foodapp.ui.splash
 
 import android.animation.Animator
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,7 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.afurkantitiz.foodapp.R
+import com.afurkantitiz.foodapp.data.local.SharedPrefManager
 import com.afurkantitiz.foodapp.databinding.FragmentSplashBinding
+import com.afurkantitiz.foodapp.ui.MainActivity
+import com.auth0.android.jwt.JWT
 
 class SplashFragment : Fragment() {
     private var _binding: FragmentSplashBinding? = null
@@ -35,10 +39,21 @@ class SplashFragment : Fragment() {
             }
 
             override fun onAnimationEnd(animation: Animator?) {
-                if (isOnboardShowed()){
-                    findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
+                val token = getToken()
+                if (!token.isNullOrEmpty()) {
+                    val jwt = JWT(token)
+                    if (!jwt.isExpired(0)) {
+                        val intent = Intent(requireContext(), MainActivity::class.java)
+                        startActivity(intent)
+                        requireActivity().finish()
+                    }
                 }else {
-                    findNavController().navigate(R.id.action_splashFragment_to_onboardFragment)
+                    if (isOnboardShowed()){
+                        findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
+
+                    }else {
+                        findNavController().navigate(R.id.action_splashFragment_to_onboardFragment)
+                    }
                 }
             }
 
@@ -55,6 +70,10 @@ class SplashFragment : Fragment() {
     private fun isOnboardShowed(): Boolean {
         val sharedPref = requireActivity().getSharedPreferences("onboard", Context.MODE_PRIVATE)
         return sharedPref.getBoolean("finished", false)
+    }
+
+    private fun getToken(): String? {
+        return SharedPrefManager(requireContext()).getToken()
     }
 
     override fun onDestroyView() {
