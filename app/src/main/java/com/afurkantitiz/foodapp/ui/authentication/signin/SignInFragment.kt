@@ -31,6 +31,10 @@ class SignInFragment : Fragment() {
         binding.signInGoToSignUpButton.setOnClickListener {
             findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
         }
+
+        binding.signInLoginButton.setOnClickListener {
+            findNavController().navigate(R.id.action_signInFragment_to_listRestaurantsFragment)
+        }
     }
 
     override fun onDestroyView() {

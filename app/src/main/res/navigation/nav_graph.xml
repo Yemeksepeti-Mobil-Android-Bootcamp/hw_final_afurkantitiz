@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_listRestaurantsFragment"
+            app:destination="@id/listRestaurantsFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -43,5 +46,13 @@
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_listRestaurantsFragment"
+            app:destination="@id/listRestaurantsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/listRestaurantsFragment"
+        android:name="com.afurkantitiz.foodapp.ui.restaurants.listrestaurant.ListRestaurantsFragment"
+        android:label="fragment_list_restaurants"
+        tools:layout="@layout/fragment_list_restaurants" />
 </navigation>

@@ -25,4 +25,6 @@
     <string name="login_to_your_account">Login To Your Account</string>
     <string name="forgot_your_password">Forgot Your Password?</string>
     <string name="don_t_have_a_account_go_to_sign_up">Don\'t have a account ? Go to Sign Up</string>
+    <string name="find_your_nfavorite_food">Find Your\nFavorite Food</string>
+    <string name="popular_restaurant_image">Popular Restaurant Image</string>
 </resources>
