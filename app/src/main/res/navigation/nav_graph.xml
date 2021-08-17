@@ -3,56 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/listRestaurantsFragment">
 
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.afurkantitiz.foodapp.ui.splash.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
-        <action
-            android:id="@+id/action_splashFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
-        <action
-            android:id="@+id/action_splashFragment_to_onboardFragment"
-            app:destination="@id/onboardFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/onboardFragment"
-        android:name="com.afurkantitiz.foodapp.ui.onboard.OnboardFragment"
-        android:label="fragment_onboard"
-        tools:layout="@layout/fragment_onboard" >
-        <action
-            android:id="@+id/action_onboardFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signInFragment"
-        android:name="com.afurkantitiz.foodapp.ui.authentication.signin.SignInFragment"
-        android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" >
-        <action
-            android:id="@+id/action_signInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_signInFragment_to_listRestaurantsFragment"
-            app:destination="@id/listRestaurantsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.afurkantitiz.foodapp.ui.authentication.signup.SignUpFragment"
-        android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
-        <action
-            android:id="@+id/action_signUpFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
-        <action
-            android:id="@+id/action_signUpFragment_to_listRestaurantsFragment"
-            app:destination="@id/listRestaurantsFragment" />
-    </fragment>
     <fragment
         android:id="@+id/listRestaurantsFragment"
         android:name="com.afurkantitiz.foodapp.ui.restaurants.listrestaurant.ListRestaurantsFragment"
         android:label="fragment_list_restaurants"
-        tools:layout="@layout/fragment_list_restaurants" />
+        tools:layout="@layout/fragment_list_restaurants" >
+        <action
+            android:id="@+id/action_listRestaurantsFragment_to_detailRestaurantFragment"
+            app:destination="@id/detailRestaurantFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailRestaurantFragment"
+        android:name="com.afurkantitiz.foodapp.ui.restaurants.detailrestaurant.DetailRestaurantFragment"
+        android:label="fragment_detail_restaurant"
+        tools:layout="@layout/fragment_detail_restaurant" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.afurkantitiz.foodapp.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

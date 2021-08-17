@@ -1,5 +1,6 @@
 package com.afurkantitiz.foodapp.ui.authentication.signin
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.afurkantitiz.foodapp.R
 import com.afurkantitiz.foodapp.databinding.FragmentSignInBinding
+import com.afurkantitiz.foodapp.ui.MainActivity
 
 class SignInFragment : Fragment() {
     private var _binding: FragmentSignInBinding? = null
@@ -33,7 +35,9 @@ class SignInFragment : Fragment() {
         }
 
         binding.signInLoginButton.setOnClickListener {
-            findNavController().navigate(R.id.action_signInFragment_to_listRestaurantsFragment)
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
         }
     }
 

@@ -11,9 +11,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.afurkantitiz.foodapp.R
 import com.afurkantitiz.foodapp.databinding.FragmentSplashBinding
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class SplashFragment : Fragment() {
     private var _binding: FragmentSplashBinding? = null
     private val binding get() = _binding!!
@@ -24,16 +22,14 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSplashBinding.inflate(inflater, container, false)
+
+        initLottieAnimation()
+
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        lottieAnimationListener()
-    }
-
-    private fun lottieAnimationListener() {
-        binding.splashLottieAnimation.addAnimatorListener(object: Animator.AnimatorListener {
+    private fun initLottieAnimation() {
+        binding.splashLottieAnimation.addAnimatorListener(object: Animator.AnimatorListener{
             override fun onAnimationStart(animation: Animator?) {
                 Log.v("Animation","Started")
             }
