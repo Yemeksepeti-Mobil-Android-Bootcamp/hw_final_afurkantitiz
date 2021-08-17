@@ -1,49 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_pattern"
+        android:layout_height="match_parent"
+        android:background="#F7F6FF"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         tools:context=".ui.restaurants.listrestaurant.ListRestaurantsFragment">
 
         <TextView
             android:id="@+id/listRestaurantTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/benton_sans_bold"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:text="@string/find_your_nfavorite_food"
-            android:lineSpacingExtra="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_18sdp"
+            android:text="Choose the"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_margin="@dimen/_14sdp"
             android:textColor="@color/black"
-            android:textSize="@dimen/_24ssp"
+            android:textSize="@dimen/_18ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/listRestaurantSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Restaurant you love"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listRestaurantTitle" />
+
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/listRestaurantSearchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_search_view"
-            android:layout_marginHorizontal="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:padding="@dimen/_4sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listRestaurantTitle" />
+        android:id="@+id/listRestaurantSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+        android:background="@drawable/rounded_search_view"
+        android:padding="@dimen/_4sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listRestaurantSubTitle" />
 
         <com.synnapps.carouselview.CarouselView
             android:id="@+id/listRestaurantCarouselView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_150sdp"
             android:layout_marginHorizontal="@dimen/_16sdp"
-            android:background="@drawable/custom_button"
+            android:background="@drawable/gradient_background"
             app:fillColor="#35D36F"
             android:layout_marginTop="@dimen/_16sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,34 +61,56 @@
             app:pageColor="@color/white"
             app:radius="@dimen/_3sdp"
             app:slideInterval="3000"
+            android:visibility="gone"
             app:strokeColor="@color/black"
             app:strokeWidth="1dp" />
 
         <TextView
-            android:id="@+id/listRestaurantRestaurantsTextView"
+            android:id="@+id/listRestaurantCategoriesTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
             android:fontFamily="@font/benton_sans_bold"
-            android:text="Restaurants"
+            android:text="Categories"
             android:textColor="@color/black"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:textSize="@dimen/_16ssp"
+            android:layout_marginHorizontal="@dimen/_16sdp"
+            android:layout_marginVertical="@dimen/_8sdp"
+            android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listRestaurantCarouselView" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listRestaurantAllRestaurantsRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/_6sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            tools:listitem="@layout/item_all_restaurant_card"
-            tools:itemCount="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/listRestaurantRestaurantsTextView" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listRestaurantCategoriesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listRestaurantCategoriesTextView"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_categories_card" />
 
-</ScrollView>
+    <TextView
+        android:id="@+id/listRestaurantRestaurantsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginVertical="@dimen/_12sdp"
+        android:fontFamily="@font/benton_sans_bold"
+        android:text="Restaurants"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listRestaurantCategoriesRecyclerView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listRestaurantRestaurantsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginVertical="@dimen/_4sdp"
+        app:layout_constraintTop_toBottomOf="@+id/listRestaurantRestaurantsTextView"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_restaurants_card" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 

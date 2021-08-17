@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemCategoriesCardView"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    app:strokeColor="@color/gray"
+    app:cardCornerRadius="@dimen/_15sdp"
+    app:strokeWidth="1.5dp"
+    android:layout_margin="@dimen/_8sdp"
+    app:cardElevation="@dimen/_5sdp">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:paddingVertical="@dimen/_12sdp"
+        android:paddingHorizontal="@dimen/_16sdp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/itemCategoriesImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            tools:src="@drawable/photo_restaurant"/>
+
+        <TextView
+            android:id="@+id/itemCategoriesName"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:textStyle="bold"
+            tools:text="deneme"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

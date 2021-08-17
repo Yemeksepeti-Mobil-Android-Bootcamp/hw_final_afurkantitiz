@@ -18,10 +18,19 @@
         android:id="@+id/detailRestaurantFragment"
         android:name="com.afurkantitiz.foodapp.ui.restaurants.detailrestaurant.DetailRestaurantFragment"
         android:label="fragment_detail_restaurant"
-        tools:layout="@layout/fragment_detail_restaurant" />
+        tools:layout="@layout/fragment_detail_restaurant" >
+        <action
+            android:id="@+id/action_detailRestaurantFragment_to_detailMealFragment"
+            app:destination="@id/detailMealFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.afurkantitiz.foodapp.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/detailMealFragment"
+        android:name="com.afurkantitiz.foodapp.ui.restaurants.detailmeal.DetailMealFragment"
+        android:label="fragment_detail_meal"
+        tools:layout="@layout/fragment_detail_meal" />
 </navigation>

@@ -30,6 +30,7 @@
                 android:id="@+id/collapsingToolbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/background_non_radius"
                 android:backgroundTint="#FF0036"
                 android:fitsSystemWindows="true"
                 app:contentScrim="#FF0036"
@@ -38,11 +39,10 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/restaurantImageView"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_200sdp"
+                        android:layout_height="200dp"
                         android:scaleType="centerCrop"
                         android:layout_marginBottom="?android:attr/actionBarSize"
                         android:src="@drawable/photo_restaurant"
@@ -63,6 +63,86 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:layout_margin="16dp"
                         android:src="@drawable/ic_baseline_arrow_back"/>
+
+                    <LinearLayout
+                        android:id="@+id/deliveryInfoLinearLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toTopOf="@id/restaurantDescriptionTextView"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/minimumFeeLinearLayout">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Delivery Info"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/deliveryInfoTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            tools:text="30-40 minutes" />
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/restaurantDescriptionTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        tools:text="Description ddeispcxsip clasipsc ağspc kiaskc asikpco"
+                        android:textColor="@color/white_grey"
+                        android:textSize="14sp"
+                        android:paddingVertical="8dp"
+                        android:maxLines="2"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/poppins_regular"
+                        android:layout_marginHorizontal="24dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <LinearLayout
+                        android:id="@+id/minimumFeeLinearLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toTopOf="@id/restaurantDescriptionTextView"
+                        app:layout_constraintLeft_toRightOf="@id/deliveryInfoLinearLayout"
+                        app:layout_constraintRight_toRightOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Minimum Fee"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/minimumFeeTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            tools:text="15.00 TL" />
+                    </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -85,6 +165,7 @@
                         android:textSize="20sp"
                         android:textStyle="bold"
                         tools:text="Restaurant Name" />
+
                 </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -106,11 +187,10 @@
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mealsRecyclerView"
+                android:id="@+id/mealsDetailRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
         </LinearLayout>
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </FrameLayout>

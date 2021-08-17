@@ -69,10 +69,10 @@ class DetailRestaurantFragment : Fragment() {
     }
 
     private fun setRecyclerViewForMeals() {
-        binding.meailRecyclerView.layoutManager =
+        binding.mealsRecyclerView.layoutManager =
             GridLayoutManager(requireContext(), 2)
-        binding.meailRecyclerView.setHasFixedSize(true)
-        binding.meailRecyclerView.adapter = restaurantDetailAdapter
+        binding.mealsRecyclerView.setHasFixedSize(true)
+        binding.mealsRecyclerView.adapter = restaurantDetailAdapter
     }
 
     override fun onDestroyView() {
