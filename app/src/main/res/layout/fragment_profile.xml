@@ -6,128 +6,143 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/_16sdp"
+    android:gravity="center"
+    android:layout_gravity="center"
     android:orientation="vertical"
     tools:context=".ui.profile.ProfileFragment">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/profileImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:padding="5dp"
-            app:strokeWidth="4dp"
-            app:strokeColor="#550009"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/profileVerticalLine"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/profileLayout">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profileImageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:padding="5dp"
+                app:strokeWidth="4dp"
+                app:strokeColor="#550009"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/profileVerticalLine"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/profileName"
+            <TextView
+                android:id="@+id/profileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                tools:text="Furkan Titiz"
+                android:textSize="36sp"
+                android:textColor="@color/black" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#550009"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginHorizontal="16dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Telephone Number : "
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/gray1" />
+                <TextView
+                    android:id="@+id/telephoneNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    tools:text="054553135453"
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Payment Method : "
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/gray1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    tools:text="054553135453"
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email Address : "
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/gray1" />
+                <TextView
+                    android:id="@+id/emailAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    tools:text="054553135453"
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Place : "
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/gray1" />
+                <TextView
+                    android:id="@+id/place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    tools:text="054553135453"
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        tools:text="Furkan Titiz"
-        android:textSize="36sp"
-        android:textColor="@color/black" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#550009"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:layout_marginHorizontal="16dp" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Telephone Number : "
-            android:textSize="@dimen/_12ssp"
-            android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/gray1" />
-        <TextView
-            android:id="@+id/telephoneNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
-            tools:text="054553135453"
-            android:textSize="@dimen/_12ssp"
-            android:fontFamily="@font/poppins_semi_bold"
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Payment Method : "
-            android:textSize="@dimen/_12ssp"
-            android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/gray1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
-            tools:text="054553135453"
-            android:textSize="@dimen/_12ssp"
-            android:fontFamily="@font/poppins_semi_bold"
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email Address : "
-            android:textSize="@dimen/_12ssp"
-            android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/gray1" />
-        <TextView
-            android:id="@+id/emailAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
-            tools:text="054553135453"
-            android:textSize="@dimen/_12ssp"
-            android:fontFamily="@font/poppins_semi_bold"
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Place : "
-            android:textSize="@dimen/_12ssp"
-            android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/gray1" />
-        <TextView
-            android:id="@+id/place"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
-            tools:text="054553135453"
-            android:textSize="@dimen/_12ssp"
-            android:fontFamily="@font/poppins_semi_bold"
-            android:textColor="@color/black" />
-    </LinearLayout>
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 </LinearLayout>

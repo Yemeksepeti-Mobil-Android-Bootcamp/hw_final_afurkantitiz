@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.afurkantitiz.foodapp.R
+import com.afurkantitiz.foodapp.data.local.SharedPrefManager
 import com.afurkantitiz.foodapp.databinding.FragmentSecondOnboardBinding
 
 class SecondOnboardFragment : Fragment() {
@@ -26,20 +27,13 @@ class SecondOnboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewPagerControlForButton()
-        onBoardingFinished()
     }
 
     private fun viewPagerControlForButton() {
         binding.secondOnboardFinishButton.setOnClickListener {
+            SharedPrefManager(requireContext()).setOnboardShow()
             findNavController().navigate(R.id.action_onboardFragment_to_signInFragment)
         }
-    }
-
-    private fun onBoardingFinished() {
-        val sharedPref = requireActivity().getSharedPreferences("onboard", Context.MODE_PRIVATE)
-        val editor = sharedPref.edit()
-        editor.putBoolean("finished", true)
-        editor.apply()
     }
 
     override fun onDestroyView() {

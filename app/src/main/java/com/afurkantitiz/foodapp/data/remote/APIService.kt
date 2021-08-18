@@ -1,6 +1,7 @@
 package com.afurkantitiz.foodapp.data.remote
 
 import com.afurkantitiz.foodapp.data.entity.meal.MealResponse
+import com.afurkantitiz.foodapp.data.entity.profile.UserResponse
 import com.afurkantitiz.foodapp.data.entity.restaurant.RestaurantListResponse
 import com.afurkantitiz.foodapp.data.entity.restaurant.RestaurantResponse
 import com.afurkantitiz.foodapp.data.entity.signin.SignInRequest
@@ -26,4 +27,7 @@ interface APIService {
 
     @GET("a/meal/{id}")
     suspend fun getMealById(@Path("id") id: String): Response<MealResponse>
+
+    @GET("auth/profile")
+    suspend fun getUser() : Response<UserResponse>
 }

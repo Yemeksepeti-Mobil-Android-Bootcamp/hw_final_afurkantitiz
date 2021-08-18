@@ -41,19 +41,21 @@ class SplashFragment : Fragment() {
             override fun onAnimationEnd(animation: Animator?) {
                 val token = getToken()
 
-                if (!token.isNullOrEmpty()) {
-                    val jwt = JWT(token)
-                    if (!jwt.isExpired(0)) {
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
-                        requireActivity().finish()
-                    }
+                if (!isOnboardShowed()){
+                    findNavController().navigate(R.id.action_splashFragment_to_onboardFragment)
                 }else {
-                    if (isOnboardShowed()){
+                    if (token.isNullOrEmpty()){
                         findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
-
                     }else {
-                        findNavController().navigate(R.id.action_splashFragment_to_onboardFragment)
+                        val jwt = JWT(token)
+
+                        if (jwt.isExpired(0)){
+                            findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
+                        }else {
+                            val intent = Intent(context, MainActivity::class.java)
+                            startActivity(intent)
+                            requireActivity().finish()
+                        }
                     }
                 }
             }
@@ -69,8 +71,7 @@ class SplashFragment : Fragment() {
     }
 
     private fun isOnboardShowed(): Boolean {
-        val sharedPref = requireActivity().getSharedPreferences("onboard", Context.MODE_PRIVATE)
-        return sharedPref.getBoolean("finished", false)
+        return SharedPrefManager(requireContext()).isOnboardShow()
     }
 
     private fun getToken(): String? {
