@@ -17,13 +17,13 @@ class DetailMealAdapter : RecyclerView.Adapter<DetailMealAdapter.DetailMealViewH
     override fun onBindViewHolder(holder: DetailMealAdapter.DetailMealViewHolder, position: Int) {
         val ingredient = ingredients[position]
 
-        holder.binding.itemChip.text = ingredient
+        holder.binding.textChip.text = ingredient
 
         holder.binding.itemChip.setOnClickListener {
-            if (holder.binding.itemChip.paintFlags == Paint.STRIKE_THRU_TEXT_FLAG){
-                holder.binding.itemChip.paintFlags = 0
+            if (holder.binding.textChip.paintFlags == Paint.STRIKE_THRU_TEXT_FLAG){
+                holder.binding.textChip.paintFlags = 0
             }else {
-                holder.binding.itemChip.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                holder.binding.textChip.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             }
         }
     }

@@ -39,7 +39,8 @@ class DetailMealFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.ingredientsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.ingredientsRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         getMealDetails()
     }
 
@@ -55,15 +56,18 @@ class DetailMealFragment : Fragment() {
                     val meal = it.data!!.data
                     viewModel.meal = meal
 
-                    adapter.setIngredientList(meal.ingredients)
-                    binding.ingredientsRecyclerView.adapter = adapter
-
                     Glide
                         .with(requireContext())
                         .load(meal.image)
                         .into(binding.imageView)
 
                     binding.mealNameTextView.text = meal.name
+                    binding.mealDescription.text = meal.description
+                    binding.mealPrice.text = meal.price
+
+
+                    adapter.setIngredientList(meal.ingredients)
+                    binding.ingredientsRecyclerView.adapter = adapter
 
                     binding.backButton.setOnClickListener {
                         it.findNavController().popBackStack()
