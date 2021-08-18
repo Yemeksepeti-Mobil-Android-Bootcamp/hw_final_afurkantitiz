@@ -40,6 +40,7 @@ class SplashFragment : Fragment() {
 
             override fun onAnimationEnd(animation: Animator?) {
                 val token = getToken()
+
                 if (!token.isNullOrEmpty()) {
                     val jwt = JWT(token)
                     if (!jwt.isExpired(0)) {

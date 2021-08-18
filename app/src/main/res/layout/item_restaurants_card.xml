@@ -37,17 +37,6 @@
             android:textColor="@color/white"
             android:layout_height="wrap_content"/>
 
-        <RatingBar
-            android:id="@+id/itemRestaurantsRating"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            android:layout_width="wrap_content"
-            android:numStars="5"
-            tools:rating="4.5"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:progressTint="@color/yellow"
-            android:secondaryProgressTint="@color/yellow"
-            android:layout_height="16dp"/>
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_10ssp"
                 android:layout_marginStart="@dimen/_4sdp"
-                android:text=" meals found"
+                android:text="$ delivery fee"
                 android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>

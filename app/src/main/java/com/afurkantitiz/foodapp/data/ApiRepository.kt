@@ -4,6 +4,7 @@ import com.afurkantitiz.foodapp.data.entity.signin.SignInRequest
 import com.afurkantitiz.foodapp.data.local.LocalDataSource
 import com.afurkantitiz.foodapp.data.remote.RemoteDataSource
 import com.afurkantitiz.foodapp.utils.performAuthTokenNetworkOperation
+import com.afurkantitiz.foodapp.utils.performNetworkOperation
 import javax.inject.Inject
 
 class ApiRepository @Inject constructor(
@@ -18,4 +19,24 @@ class ApiRepository @Inject constructor(
             localDataSource.saveToken(it)
         }
     )
+
+    fun getRestaurants() =
+        performNetworkOperation {
+            remoteDataSource.getRestaurants()
+        }
+
+    fun getRestaurantById(id: String) =
+        performNetworkOperation {
+            remoteDataSource.getRestaurantById(id)
+        }
+
+    fun getMealById(id: String) =
+        performNetworkOperation {
+            remoteDataSource.getMealById(id)
+        }
+
+    fun getRestaurantByCuisine(cuisine: String) =
+        performNetworkOperation {
+            remoteDataSource.getRestaurantsByCuisine(cuisine)
+        }
 }

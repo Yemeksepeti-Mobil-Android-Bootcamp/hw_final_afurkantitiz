@@ -5,17 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import com.afurkantitiz.foodapp.data.entity.Meal
+import com.afurkantitiz.foodapp.data.entity.meal.Meal
 import com.afurkantitiz.foodapp.databinding.FragmentDetailRestaurantBinding
+import com.afurkantitiz.foodapp.utils.Resource
+import com.afurkantitiz.foodapp.utils.gone
+import com.afurkantitiz.foodapp.utils.show
+import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailRestaurantFragment : Fragment() {
     private var _binding: FragmentDetailRestaurantBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var mealList: ArrayList<Meal>
-    private lateinit var restaurantDetailAdapter: DetailRestaurantsAdapter
+    private val viewModel: DetailRestaurantViewModel by viewModels()
+    private val args: DetailRestaurantFragmentArgs by navArgs()
 
+    private var adapter: DetailRestaurantsAdapter = DetailRestaurantsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,56 +33,58 @@ class DetailRestaurantFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailRestaurantBinding.inflate(inflater, container, false)
-
-        initViews()
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setFakeDataForMeals()
+        binding.mealsRecyclerView.layoutManager = GridLayoutManager(context, 2)
+        getRestaurantDetail()
+        onClick()
     }
 
-    private fun initViews() {
-        mealList = arrayListOf()
-        restaurantDetailAdapter = DetailRestaurantsAdapter(mealList, requireContext())
+    private fun onClick() {
+        binding.backButton.setOnClickListener {
+            it.findNavController().popBackStack()
+        }
     }
 
-    private fun setFakeDataForMeals() {
-        mealList.add(Meal("https://static-40.sinclairstoryline.com/resources/media/6b7a7c7c-3c44-489c-9880-4a17508cdc6d-large16x9_Postworkout_meal.jpg?1577802416711",
-"Deneme",
-        "$25",
-        "dene"))
+    private fun getRestaurantDetail() {
+        viewModel.getRestaurantDetail(args.restaurantId).observe(viewLifecycleOwner, {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    binding.progressBar.show()
+                    binding.collapseLayout.gone()
+                }
 
-        mealList.add(Meal("https://static-40.sinclairstoryline.com/resources/media/6b7a7c7c-3c44-489c-9880-4a17508cdc6d-large16x9_Postworkout_meal.jpg?1577802416711",
-            "Deneme1",
-            "$27",
-            "dene"))
+                Resource.Status.SUCCESS -> {
+                    binding.progressBar.gone()
+                    binding.collapseLayout.show()
 
-        mealList.add(Meal("https://static-40.sinclairstoryline.com/resources/media/6b7a7c7c-3c44-489c-9880-4a17508cdc6d-large16x9_Postworkout_meal.jpg?1577802416711",
-            "Deneme2",
-            "$26",
-            "dene"))
+                    val restaurant = it.data!!.data
+                    setMealsAdapter(restaurant.meals, restaurant.id)
 
-        mealList.add(Meal("https://static-40.sinclairstoryline.com/resources/media/6b7a7c7c-3c44-489c-9880-4a17508cdc6d-large16x9_Postworkout_meal.jpg?1577802416711",
-            "Deneme2",
-            "$26",
-            "dene"))
+                    Glide.with(binding.restaurantImageView.context)
+                        .load(restaurant.image)
+                        .into(binding.restaurantImageView)
 
-        mealList.add(Meal("https://static-40.sinclairstoryline.com/resources/media/6b7a7c7c-3c44-489c-9880-4a17508cdc6d-large16x9_Postworkout_meal.jpg?1577802416711",
-            "Deneme2",
-            "$26",
-            "dene"))
-
-        setRecyclerViewForMeals()
+                    binding.restaurantNameTextView.text = restaurant.name
+                    binding.deliveryFee.text = restaurant.minimumDeliveryFee
+                    binding.deliveryInfo.text = restaurant.deliveryInfo
+                    binding.payments.text = restaurant.paymentMethods
+                }
+                Resource.Status.ERROR -> {
+                    binding.progressBar.show()
+                    binding.collapseLayout.gone()
+                }
+            }
+        })
     }
 
-    private fun setRecyclerViewForMeals() {
-        binding.mealsRecyclerView.layoutManager =
-            GridLayoutManager(requireContext(), 2)
-        binding.mealsRecyclerView.setHasFixedSize(true)
-        binding.mealsRecyclerView.adapter = restaurantDetailAdapter
+
+    private fun setMealsAdapter(mealList: List<Meal>, restaurantId: String) {
+        adapter.setMealList(mealList, restaurantId)
+        binding.mealsRecyclerView.adapter = adapter
     }
 
     override fun onDestroyView() {

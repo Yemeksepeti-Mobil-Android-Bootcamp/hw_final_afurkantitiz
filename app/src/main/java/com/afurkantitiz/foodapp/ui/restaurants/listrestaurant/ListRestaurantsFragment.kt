@@ -1,27 +1,34 @@
 package com.afurkantitiz.foodapp.ui.restaurants.listrestaurant
 
+import android.app.ActionBar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afurkantitiz.foodapp.R
-import com.afurkantitiz.foodapp.data.entity.Categories
-import com.afurkantitiz.foodapp.data.entity.Restaurant
+import com.afurkantitiz.foodapp.data.entity.restaurant.Restaurant
 import com.afurkantitiz.foodapp.databinding.FragmentListRestaurantsBinding
-import com.synnapps.carouselview.ImageListener
+import com.afurkantitiz.foodapp.utils.Resource
+import com.afurkantitiz.foodapp.utils.gone
+import com.afurkantitiz.foodapp.utils.show
+import com.google.android.material.button.MaterialButton
+import dagger.hilt.android.AndroidEntryPoint
 
-class ListRestaurantsFragment : Fragment(),ICategoriesOnClick {
+@AndroidEntryPoint
+class ListRestaurantsFragment : Fragment() {
     private var _binding: FragmentListRestaurantsBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var restaurantsList: ArrayList<Restaurant>
-    private lateinit var categoriesList: ArrayList<Categories>
-    private lateinit var restaurantsAdapter: RestaurantsAdapter
-    private lateinit var categoriesAdapter: CategoriesAdapter
-    private var currentPositionalCategory: Int? = null
+    private val viewModel: ListRestaurantsViewModel by viewModels()
+
+    private var restaurantsAdapter = RestaurantsAdapter()
+    private var cuisineList: HashMap<String, MaterialButton> = hashMapOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,65 +36,112 @@ class ListRestaurantsFragment : Fragment(),ICategoriesOnClick {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListRestaurantsBinding.inflate(inflater, container, false)
-
-        initViews()
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setFakeDataForAllRestaurants()
-        setFakeDataForCategories()
+        binding.listRestaurantRestaurantsRecyclerView.layoutManager = GridLayoutManager(context, 2)
+
+        getRestaurantsForAPI()
+        setCuisineList()
     }
 
-    private fun initViews() {
-        restaurantsList = arrayListOf()
-        categoriesList = arrayListOf()
-        restaurantsAdapter = RestaurantsAdapter(restaurantsList, requireContext())
-        categoriesAdapter = CategoriesAdapter(categoriesList, requireContext())
+    private fun getRestaurantsForAPI(){
+        viewModel.getRestaurants().observe(viewLifecycleOwner, {
+            when (it.status) {
+                Resource.Status.LOADING -> binding.progressBar.show()
 
-        categoriesAdapter.addListener(this)
+                Resource.Status.SUCCESS -> {
+                    viewModel.restaurantList = it.data?.restaurantList
+                    setRestaurants(viewModel.restaurantList)
+                }
+
+                Resource.Status.ERROR -> binding.progressBar.show()
+            }
+        })
     }
 
-    private fun setFakeDataForAllRestaurants() {
-        restaurantsList.add(Restaurant("https://media-cdn.tripadvisor.com/media/photo-s/1a/fe/be/14/papa-john-s-azerbaijan.jpg", "Healty Food","30","dasdasdsa", "4"))
-        restaurantsList.add(Restaurant("https://media-cdn.tripadvisor.com/media/photo-s/1a/fe/be/14/papa-john-s-azerbaijan.jpg", "Healty Food","20","dasdasdas","5"))
-        restaurantsList.add(Restaurant("https://media-cdn.tripadvisor.com/media/photo-s/1a/fe/be/14/papa-john-s-azerbaijan.jpg", "Healty Food","10","adsdsadas","3"))
-        restaurantsList.add(Restaurant("https://media-cdn.tripadvisor.com/media/photo-s/1a/fe/be/14/papa-john-s-azerbaijan.jpg", "Healty Food","40","adsdsadas","2"))
-        setRecyclerViewForAllRestaurants()
-    }
-
-    private fun setFakeDataForCategories() {
-        categoriesList.add(Categories("Food","https://media-cdn.tripadvisor.com/media/photo-s/1a/fe/be/14/papa-john-s-azerbaijan.jpg"))
-        categoriesList.add(Categories("Food","https://media-cdn.tripadvisor.com/media/photo-s/1a/fe/be/14/papa-john-s-azerbaijan.jpg"))
-        categoriesList.add(Categories("Food","https://media-cdn.tripadvisor.com/media/photo-s/1a/fe/be/14/papa-john-s-azerbaijan.jpg"))
-        categoriesList.add(Categories("Food","https://media-cdn.tripadvisor.com/media/photo-s/1a/fe/be/14/papa-john-s-azerbaijan.jpg"))
-        categoriesList.add(Categories("Food","https://media-cdn.tripadvisor.com/media/photo-s/1a/fe/be/14/papa-john-s-azerbaijan.jpg"))
-        categoriesList.add(Categories("Food","https://media-cdn.tripadvisor.com/media/photo-s/1a/fe/be/14/papa-john-s-azerbaijan.jpg"))
-        setRecyclerViewForCategories()
-    }
-
-    private fun setRecyclerViewForCategories() {
-        binding.listRestaurantCategoriesRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.listRestaurantCategoriesRecyclerView.setHasFixedSize(true)
-        binding.listRestaurantCategoriesRecyclerView.adapter = categoriesAdapter
-    }
-
-    private fun setRecyclerViewForAllRestaurants() {
-        binding.listRestaurantRestaurantsRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.listRestaurantRestaurantsRecyclerView.setHasFixedSize(true)
+    private fun setRestaurants(restaurantList: List<Restaurant>?) {
+        isRestaurantListVisible(restaurantList.isNullOrEmpty().not())
+        restaurantsAdapter.setData(restaurantList)
         binding.listRestaurantRestaurantsRecyclerView.adapter = restaurantsAdapter
+    }
+
+    private fun setCuisineList() {
+        val list = resources.getStringArray(R.array.Cuisines).toMutableList()
+        list.add(0, "All")
+
+        val params = ActionBar.LayoutParams(
+            ActionBar.LayoutParams.WRAP_CONTENT,
+            ActionBar.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(0, 0, 80, 0)
+
+        list.forEachIndexed { index, item ->
+            val button = MaterialButton(requireContext(), null, R.attr.materialButtonOutlinedStyle)
+            button.text = item
+            button.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    if (index == 0)
+                        R.color.red
+                    else
+                        R.color.gray1
+                )
+            )
+            button.layoutParams = params
+            button.isAllCaps = false
+            binding.cuisineTypeLinearLayout.addView(button)
+            cuisineList[item] = button
+        }
+        addCuisineTypesListener()
+    }
+
+    private fun addCuisineTypesListener() {
+        cuisineList.forEach { cuisine ->
+            cuisine.value.setOnClickListener {
+                //clear other text color
+                cuisineList.values.forEach { cuisine ->
+                    cuisine.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.gray
+                        )
+                    )
+                }
+                //make orange selected text
+                cuisine.value.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
+                binding.listRestaurantSearchView.queryHint = "Search in ${cuisine.key}"
+                binding.listRestaurantSearchView.onActionViewCollapsed()
+                if (cuisine.key == "All")
+                    getRestaurantsForAPI()
+                else
+                    sendCuisineRequest(cuisine.key)
+            }
+        }
+    }
+
+    private fun sendCuisineRequest(cuisineName: String) {
+        viewModel.getRestaurantByCuisine(cuisineName).observe(viewLifecycleOwner, { response ->
+            when (response.status) {
+                Resource.Status.LOADING -> binding.progressBar.show()
+                Resource.Status.SUCCESS -> {
+                    viewModel.restaurantList = response.data?.restaurantList
+                    setRestaurants(response.data?.restaurantList)
+                }
+                Resource.Status.ERROR -> isRestaurantListVisible(false)
+            }
+        })
+    }
+
+    private fun isRestaurantListVisible(isVisible: Boolean) {
+        binding.progressBar.gone()
+        binding.listRestaurantRestaurantsRecyclerView.isVisible = isVisible
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onClick(position: Int) {
-        currentPositionalCategory = position
     }
 }

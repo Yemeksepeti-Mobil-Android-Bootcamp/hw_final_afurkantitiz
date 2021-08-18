@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_detailRestaurantFragment_to_detailMealFragment"
             app:destination="@id/detailMealFragment" />
+        <argument
+            android:name="restaurantId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -32,5 +35,17 @@
         android:id="@+id/detailMealFragment"
         android:name="com.afurkantitiz.foodapp.ui.restaurants.detailmeal.DetailMealFragment"
         android:label="fragment_detail_meal"
-        tools:layout="@layout/fragment_detail_meal" />
+        tools:layout="@layout/fragment_detail_meal" >
+        <argument
+            android:name="mealId"
+            app:argType="string" />
+        <argument
+            android:name="restaurantId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.afurkantitiz.foodapp.ui.orders.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" />
 </navigation>

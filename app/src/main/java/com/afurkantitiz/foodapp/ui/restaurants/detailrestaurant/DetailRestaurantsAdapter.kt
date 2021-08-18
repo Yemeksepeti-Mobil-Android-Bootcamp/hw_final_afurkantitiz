@@ -1,25 +1,17 @@
 package com.afurkantitiz.foodapp.ui.restaurants.detailrestaurant
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.afurkantitiz.foodapp.R
-import com.afurkantitiz.foodapp.data.entity.Meal
+import com.afurkantitiz.foodapp.data.entity.meal.Meal
 import com.afurkantitiz.foodapp.databinding.ItemMealCardBinding
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-
-import com.bumptech.glide.request.RequestOptions
-
-
-
-
-class DetailRestaurantsAdapter(private val allMealsList: ArrayList<Meal>, private val mContext: Context)
-    : RecyclerView.Adapter<DetailRestaurantsAdapter.AllMealsViewHolder>(){
+class DetailRestaurantsAdapter : RecyclerView.Adapter<DetailRestaurantsAdapter.AllMealsViewHolder>(){
+    private lateinit var mealList: List<Meal>
+    private lateinit var restaurantId: String
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllMealsViewHolder {
         val binding = ItemMealCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -27,26 +19,30 @@ class DetailRestaurantsAdapter(private val allMealsList: ArrayList<Meal>, privat
     }
 
     override fun onBindViewHolder(holder: AllMealsViewHolder, position: Int) {
-        val allMeal: Meal = allMealsList[position]
+        val allMeal: Meal = mealList[position]
 
-        holder.binding.itemMealsNameText.text = allMeal.mealName
-        holder.binding.itemMealsPrice.text = allMeal.mealPrice
-
-        var requestOptions = RequestOptions()
-        requestOptions = requestOptions.transform(RoundedCorners(16))
+        holder.binding.itemMealsNameText.text = allMeal.name
+        holder.binding.itemMealsPrice.text = allMeal.price
 
         Glide
-            .with(mContext)
-            .load(allMeal.mealImage)
-            .apply(requestOptions)
+            .with(holder.binding.itemMealsImageView.context)
+            .load(allMeal.image)
             .into(holder.binding.itemMealsImageView)
 
         holder.binding.itemMealsCardView.setOnClickListener {
-            it.findNavController().navigate(R.id.action_detailRestaurantFragment_to_detailMealFragment)
+            val action =
+                DetailRestaurantFragmentDirections.actionDetailRestaurantFragmentToDetailMealFragment(allMeal.id,restaurantId)
+            it.findNavController().navigate(action)
         }
     }
 
-    override fun getItemCount(): Int = allMealsList.size
+    fun setMealList(mealList: List<Meal>, restaurantId: String) {
+        this.restaurantId = restaurantId
+        this.mealList = mealList
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount(): Int = mealList.size
 
     inner class AllMealsViewHolder(val binding: ItemMealCardBinding): RecyclerView.ViewHolder(binding.root)
 }
