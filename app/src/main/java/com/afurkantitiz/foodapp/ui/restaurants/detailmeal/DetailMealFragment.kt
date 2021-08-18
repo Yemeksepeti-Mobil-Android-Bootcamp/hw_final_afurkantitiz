@@ -26,6 +26,8 @@ class DetailMealFragment : Fragment() {
     private val args: DetailMealFragmentArgs by navArgs()
     private val viewModel: DetailMealViewModel by viewModels()
 
+    private var adapter: DetailMealAdapter = DetailMealAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,6 +39,7 @@ class DetailMealFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.ingredientsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         getMealDetails()
     }
 
@@ -51,6 +54,9 @@ class DetailMealFragment : Fragment() {
 
                     val meal = it.data!!.data
                     viewModel.meal = meal
+
+                    adapter.setIngredientList(meal.ingredients)
+                    binding.ingredientsRecyclerView.adapter = adapter
 
                     Glide
                         .with(requireContext())
