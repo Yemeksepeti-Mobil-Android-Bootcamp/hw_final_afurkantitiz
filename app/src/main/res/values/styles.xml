@@ -4,4 +4,8 @@
         <item name="android:textSize">@dimen/_20ssp</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
+        <item name="android:background">#00000000</item>
+    </style>
 </resources>
