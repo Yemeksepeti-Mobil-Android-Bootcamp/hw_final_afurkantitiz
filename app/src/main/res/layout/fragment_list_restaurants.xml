@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="#F7F6FF"
         tools:context=".ui.restaurants.listrestaurant.ListRestaurantsFragment">
 
@@ -50,24 +50,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listRestaurantSubTitle" />
 
-        <com.synnapps.carouselview.CarouselView
-            android:id="@+id/listRestaurantCarouselView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
-            android:layout_marginHorizontal="@dimen/_16sdp"
-            android:background="@drawable/gradient_background"
-            app:fillColor="#35D36F"
-            android:layout_marginTop="@dimen/_16sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.512"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listRestaurantSearchView"
-            app:pageColor="@color/white"
-            app:radius="@dimen/_3sdp"
-            app:slideInterval="3000"
-            android:visibility="gone"
-            app:strokeColor="@color/black"
-            app:strokeWidth="1dp" />
 
         <TextView
             android:id="@+id/listRestaurantCategoriesTextView"
@@ -80,7 +62,7 @@
             android:layout_marginVertical="@dimen/_16sdp"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listRestaurantCarouselView" />
+            app:layout_constraintTop_toBottomOf="@+id/listRestaurantSearchView" />
 
         <HorizontalScrollView
             android:id="@+id/horizontalScroll"
@@ -121,9 +103,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listRestaurantRestaurantsRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/_8sdp"
             android:layout_marginVertical="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listRestaurantRestaurantsTextView"
