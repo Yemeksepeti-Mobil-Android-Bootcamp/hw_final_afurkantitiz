@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:background="#F7F6FF"
         tools:context=".ui.restaurants.listrestaurant.ListRestaurantsFragment">
 
@@ -42,6 +42,7 @@
             android:id="@+id/listRestaurantSearchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:iconifiedByDefault="false"
             android:layout_marginVertical="@dimen/_16sdp"
             android:layout_marginHorizontal="@dimen/_12sdp"
             android:background="@drawable/rounded_search_view"

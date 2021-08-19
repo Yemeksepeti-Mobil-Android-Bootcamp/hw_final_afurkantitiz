@@ -43,4 +43,8 @@ class ApiRepository @Inject constructor(
     fun getUser() = performNetworkOperation {
         remoteDataSource.getUser()
     }
+
+    fun getOrder() = performNetworkOperation {
+            remoteDataSource.getOrders()
+        }
 }

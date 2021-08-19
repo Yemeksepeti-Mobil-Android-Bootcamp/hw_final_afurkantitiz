@@ -1,6 +1,7 @@
 package com.afurkantitiz.foodapp.data.remote
 
 import com.afurkantitiz.foodapp.data.entity.meal.MealResponse
+import com.afurkantitiz.foodapp.data.entity.order.OrderResponse
 import com.afurkantitiz.foodapp.data.entity.profile.UserResponse
 import com.afurkantitiz.foodapp.data.entity.restaurant.RestaurantListResponse
 import com.afurkantitiz.foodapp.data.entity.restaurant.RestaurantResponse
@@ -30,4 +31,7 @@ interface APIService {
 
     @GET("auth/profile")
     suspend fun getUser() : Response<UserResponse>
+
+    @GET("a/order")
+    suspend fun getOrders(): Response<OrderResponse>
 }
