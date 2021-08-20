@@ -61,7 +61,7 @@ class NetworkModule {
 
     @Provides
     fun provideEndPoint(): EndPoint {
-        return EndPoint("https://dist-learn.herokuapp.com/api/")
+        return EndPoint("https://fooddeliveryapp26.herokuapp.com/api/")
     }
 }
 
