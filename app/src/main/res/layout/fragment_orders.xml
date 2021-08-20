@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_16sdp"
     android:orientation="vertical"
-    tools:context=".ui.orders.OrdersFragment">
+    tools:context=".ui.profile.orders.OrdersFragment">
 
     <TextView
         android:layout_width="wrap_content"

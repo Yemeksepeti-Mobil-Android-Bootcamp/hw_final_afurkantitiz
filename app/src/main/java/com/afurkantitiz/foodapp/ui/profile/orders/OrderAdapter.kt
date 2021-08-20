@@ -1,10 +1,9 @@
-package com.afurkantitiz.foodapp.ui.orders
+package com.afurkantitiz.foodapp.ui.profile.orders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.afurkantitiz.foodapp.data.entity.order.Order
-import com.afurkantitiz.foodapp.data.entity.restaurant.Restaurant
 import com.afurkantitiz.foodapp.databinding.ItemOrderCardBinding
 import com.bumptech.glide.Glide
 

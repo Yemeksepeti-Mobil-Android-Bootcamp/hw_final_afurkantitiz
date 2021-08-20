@@ -1,4 +1,4 @@
-package com.afurkantitiz.foodapp.ui.restaurants.listrestaurant
+package com.afurkantitiz.foodapp.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
@@ -12,7 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ListRestaurantsViewModel @Inject constructor(
+class RestaurantsViewModel @Inject constructor(
     var savedStateHandle: SavedStateHandle,
     private var apiRepository: ApiRepository
 ) : ViewModel() {

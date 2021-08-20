@@ -1,4 +1,4 @@
-package com.afurkantitiz.foodapp.ui.orders
+package com.afurkantitiz.foodapp.ui.profile.orders
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle

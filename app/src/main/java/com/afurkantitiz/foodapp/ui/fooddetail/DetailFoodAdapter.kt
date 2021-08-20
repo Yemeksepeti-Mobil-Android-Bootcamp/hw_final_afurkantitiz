@@ -1,4 +1,4 @@
-package com.afurkantitiz.foodapp.ui.restaurants.detailmeal
+package com.afurkantitiz.foodapp.ui.fooddetail
 
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -6,15 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.afurkantitiz.foodapp.databinding.ItemIngredientCardBinding
 
-class DetailMealAdapter : RecyclerView.Adapter<DetailMealAdapter.DetailMealViewHolder>() {
+class DetailFoodAdapter : RecyclerView.Adapter<DetailFoodAdapter.DetailMealViewHolder>() {
     private lateinit var ingredients: List<String>
 
-    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): DetailMealAdapter.DetailMealViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): DetailMealViewHolder {
         val binding = ItemIngredientCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DetailMealViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: DetailMealAdapter.DetailMealViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DetailMealViewHolder, position: Int) {
         val ingredient = ingredients[position]
 
         holder.binding.textChip.text = ingredient

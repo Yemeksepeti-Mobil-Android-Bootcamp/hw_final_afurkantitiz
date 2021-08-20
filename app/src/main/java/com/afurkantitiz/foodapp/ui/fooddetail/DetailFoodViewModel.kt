@@ -1,4 +1,4 @@
-package com.afurkantitiz.foodapp.ui.restaurants.detailmeal
+package com.afurkantitiz.foodapp.ui.fooddetail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
@@ -11,7 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailMealViewModel @Inject constructor(
+class DetailFoodViewModel @Inject constructor(
     var savedStateHandle: SavedStateHandle,
     private var apiRepository: ApiRepository
 ) : ViewModel() {

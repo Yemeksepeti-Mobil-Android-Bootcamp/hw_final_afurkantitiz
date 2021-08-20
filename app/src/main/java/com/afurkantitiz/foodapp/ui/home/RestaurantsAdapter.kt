@@ -1,10 +1,9 @@
-package com.afurkantitiz.foodapp.ui.restaurants.listrestaurant
+package com.afurkantitiz.foodapp.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.afurkantitiz.foodapp.R
 import com.afurkantitiz.foodapp.data.entity.restaurant.Restaurant
 import com.afurkantitiz.foodapp.databinding.ItemRestaurantsCardBinding
 import com.bumptech.glide.Glide
@@ -31,7 +30,7 @@ class RestaurantsAdapter : RecyclerView.Adapter<RestaurantsAdapter.AllRestaurant
 
         holder.binding.itemRestaurantsCardView.setOnClickListener {
             val action =
-                ListRestaurantsFragmentDirections.actionListRestaurantsFragmentToDetailRestaurantFragment(
+                RestaurantsFragmentDirections.actionListRestaurantsFragmentToDetailRestaurantFragment(
                     allRestaurant.id
                 )
             it.findNavController().navigate(action)

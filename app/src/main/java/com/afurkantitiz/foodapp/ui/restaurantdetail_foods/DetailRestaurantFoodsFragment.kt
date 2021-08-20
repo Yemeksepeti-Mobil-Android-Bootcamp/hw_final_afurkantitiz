@@ -1,4 +1,4 @@
-package com.afurkantitiz.foodapp.ui.restaurants.detailrestaurant
+package com.afurkantitiz.foodapp.ui.restaurantdetail_foods
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -18,14 +18,14 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailRestaurantFragment : Fragment() {
+class DetailRestaurantFoodsFragment : Fragment() {
     private var _binding: FragmentDetailRestaurantBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: DetailRestaurantViewModel by viewModels()
-    private val args: DetailRestaurantFragmentArgs by navArgs()
+    private val foodsViewModel: DetailRestaurantFoodsViewModel by viewModels()
+    private val args: DetailRestaurantFoodsFragmentArgs by navArgs()
 
-    private var adapter: DetailRestaurantsAdapter = DetailRestaurantsAdapter()
+    private var adapter: DetailRestaurantFoodsAdapter = DetailRestaurantFoodsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +50,7 @@ class DetailRestaurantFragment : Fragment() {
     }
 
     private fun getRestaurantDetail() {
-        viewModel.getRestaurantDetail(args.restaurantId).observe(viewLifecycleOwner, {
+        foodsViewModel.getRestaurantDetail(args.restaurantId).observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     binding.progressBar.show()

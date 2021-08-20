@@ -1,4 +1,4 @@
-package com.afurkantitiz.foodapp.ui.restaurants.listrestaurant
+package com.afurkantitiz.foodapp.ui.home
 
 interface ICategoriesOnClick {
     fun onClick(position: Int)

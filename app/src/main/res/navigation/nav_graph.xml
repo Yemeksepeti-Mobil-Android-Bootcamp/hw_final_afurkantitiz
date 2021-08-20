@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listRestaurantsFragment"
-        android:name="com.afurkantitiz.foodapp.ui.restaurants.listrestaurant.ListRestaurantsFragment"
+        android:name="com.afurkantitiz.foodapp.ui.home.RestaurantsFragment"
         android:label="fragment_list_restaurants"
         tools:layout="@layout/fragment_list_restaurants" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailRestaurantFragment"
-        android:name="com.afurkantitiz.foodapp.ui.restaurants.detailrestaurant.DetailRestaurantFragment"
+        android:name="com.afurkantitiz.foodapp.ui.restaurantdetail_foods.DetailRestaurantFoodsFragment"
         android:label="fragment_detail_restaurant"
         tools:layout="@layout/fragment_detail_restaurant" >
         <action
@@ -33,7 +33,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/detailMealFragment"
-        android:name="com.afurkantitiz.foodapp.ui.restaurants.detailmeal.DetailMealFragment"
+        android:name="com.afurkantitiz.foodapp.ui.fooddetail.DetailFoodFragment"
         android:label="fragment_detail_meal"
         tools:layout="@layout/fragment_detail_meal" >
         <argument
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/ordersFragment"
-        android:name="com.afurkantitiz.foodapp.ui.orders.OrdersFragment"
+        android:name="com.afurkantitiz.foodapp.ui.profile.orders.OrdersFragment"
         android:label="fragment_orders"
         tools:layout="@layout/fragment_orders" />
 </navigation>

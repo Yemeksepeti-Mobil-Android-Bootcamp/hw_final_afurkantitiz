@@ -1,4 +1,4 @@
-package com.afurkantitiz.foodapp.ui.restaurants.listrestaurant
+package com.afurkantitiz.foodapp.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -17,11 +17,11 @@ import com.afurkantitiz.foodapp.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ListRestaurantsFragment : Fragment(), ICategoriesOnClick {
+class RestaurantsFragment : Fragment(), ICategoriesOnClick {
     private var _binding: FragmentListRestaurantsBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ListRestaurantsViewModel by viewModels()
+    private val viewModel: RestaurantsViewModel by viewModels()
     private var restaurantsAdapter = RestaurantsAdapter()
     private lateinit var categoriesAdapter: CategoriesAdapter
 

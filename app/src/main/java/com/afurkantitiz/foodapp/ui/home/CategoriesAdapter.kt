@@ -1,4 +1,4 @@
-package com.afurkantitiz.foodapp.ui.restaurants.listrestaurant
+package com.afurkantitiz.foodapp.ui.home
 
 import android.content.Context
 import android.os.Build
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.afurkantitiz.foodapp.R
 import com.afurkantitiz.foodapp.data.entity.Categories
 import com.afurkantitiz.foodapp.databinding.ItemCategoriesCardBinding
-import com.bumptech.glide.Glide
 
 class CategoriesAdapter(private val categoriesList: ArrayList<Categories>, private val mContext: Context)
     : RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>(){

@@ -1,7 +1,6 @@
-package com.afurkantitiz.foodapp.ui.restaurants.detailmeal
+package com.afurkantitiz.foodapp.ui.fooddetail
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,18 +14,17 @@ import com.afurkantitiz.foodapp.utils.Resource
 import com.afurkantitiz.foodapp.utils.gone
 import com.afurkantitiz.foodapp.utils.show
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailMealFragment : Fragment() {
+class DetailFoodFragment : Fragment() {
     private var _binding: FragmentDetailMealBinding? = null
     private val binding get() = _binding!!
 
-    private val args: DetailMealFragmentArgs by navArgs()
-    private val viewModel: DetailMealViewModel by viewModels()
+    private val args: DetailFoodFragmentArgs by navArgs()
+    private val viewModel: DetailFoodViewModel by viewModels()
 
-    private var adapter: DetailMealAdapter = DetailMealAdapter()
+    private var adapter: DetailFoodAdapter = DetailFoodAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -1,4 +1,4 @@
-package com.afurkantitiz.foodapp.ui.orders
+package com.afurkantitiz.foodapp.ui.profile.orders
 
 import android.os.Bundle
 import android.util.Log
