@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -41,6 +42,23 @@ class RestaurantsFragment : Fragment(), ICategoriesOnClick {
         super.onViewCreated(view, savedInstanceState)
 
         getRestaurants()
+        onSearchViewListener()
+    }
+
+    private fun onSearchViewListener() {
+        binding.listRestaurantSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val filterList = viewModel.searchViewForRestaurants(query)
+                setRestaurants(filterList)
+                return true
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                val filterList = viewModel.searchViewForRestaurants(query)
+                setRestaurants(filterList)
+                return true
+            }
+        })
     }
 
     private fun initViews() {

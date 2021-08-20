@@ -27,4 +27,6 @@ data class Restaurant(
     @SerializedName("website")
     val website: String,
     @SerializedName("cuisine")
-    val cuisine: String)
+    val cuisine: String,
+    @SerializedName("district")
+    val district: String)

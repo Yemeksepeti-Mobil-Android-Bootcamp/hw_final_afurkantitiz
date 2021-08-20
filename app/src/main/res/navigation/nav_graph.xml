@@ -44,8 +44,8 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/ordersFragment"
-        android:name="com.afurkantitiz.foodapp.ui.profile.orders.OrdersFragment"
-        android:label="fragment_orders"
-        tools:layout="@layout/fragment_orders" />
+        android:id="@+id/cartFragment"
+        android:name="com.afurkantitiz.foodapp.ui.cart.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
 </navigation>

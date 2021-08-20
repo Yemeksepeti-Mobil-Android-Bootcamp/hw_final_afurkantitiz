@@ -37,4 +37,18 @@ class RestaurantsViewModel @Inject constructor(
             Categories("Dessert")
         )
     }
+
+    fun searchViewForRestaurants(query: String?): List<Restaurant>? {
+        if (query.isNullOrEmpty())
+            return restaurantList
+
+        val filterList: MutableList<Restaurant> = mutableListOf()
+        restaurantList?.forEach { restaurant ->
+            if (restaurant.name.contains(query, true))
+                filterList.add(restaurant)
+            else if (restaurant.district.contains(query, true))
+                filterList.add(restaurant)
+        }
+        return filterList
+    }
 }
