@@ -7,6 +7,8 @@ import com.afurkantitiz.foodapp.data.entity.restaurant.RestaurantListResponse
 import com.afurkantitiz.foodapp.data.entity.restaurant.RestaurantResponse
 import com.afurkantitiz.foodapp.data.entity.signin.SignInRequest
 import com.afurkantitiz.foodapp.data.entity.signin.SignInResponse
+import com.afurkantitiz.foodapp.data.entity.signup.SignUpRequest
+import com.afurkantitiz.foodapp.data.entity.signup.SignUpResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -34,4 +36,7 @@ interface APIService {
 
     @GET("a/order")
     suspend fun getOrders(): Response<OrderResponse>
+
+    @POST("auth/register")
+    suspend fun register(@Body request: SignUpRequest): Response<SignUpResponse>
 }

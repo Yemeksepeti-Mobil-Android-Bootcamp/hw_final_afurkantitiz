@@ -3,6 +3,7 @@ package com.afurkantitiz.foodapp.utils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.afurkantitiz.foodapp.data.entity.signin.SignInResponse
+import com.afurkantitiz.foodapp.data.entity.signup.SignUpResponse
 import kotlinx.coroutines.Dispatchers
 
 fun <T> performNetworkOperation(call: suspend () -> Resource<T>): LiveData<Resource<T>> {
@@ -33,6 +34,10 @@ fun <T> performAuthTokenNetworkOperation(
             val data = networkCall.data!!
 
             if (data is SignInResponse) {
+                saveToken(data.token)
+            }
+
+            if (data is SignUpResponse) {
                 saveToken(data.token)
             }
 

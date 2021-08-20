@@ -1,6 +1,7 @@
 package com.afurkantitiz.foodapp.data
 
 import com.afurkantitiz.foodapp.data.entity.signin.SignInRequest
+import com.afurkantitiz.foodapp.data.entity.signup.SignUpRequest
 import com.afurkantitiz.foodapp.data.local.LocalDataSource
 import com.afurkantitiz.foodapp.data.remote.RemoteDataSource
 import com.afurkantitiz.foodapp.utils.performAuthTokenNetworkOperation
@@ -14,6 +15,15 @@ class ApiRepository @Inject constructor(
     fun login(request: SignInRequest) = performAuthTokenNetworkOperation(
         call = {
             remoteDataSource.postLogin(request)
+        },
+        saveToken = {
+            localDataSource.saveToken(it)
+        }
+    )
+
+    fun signUp(request: SignUpRequest) = performAuthTokenNetworkOperation(
+        call = {
+            remoteDataSource.postRegister(request)
         },
         saveToken = {
             localDataSource.saveToken(it)
