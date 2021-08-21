@@ -67,7 +67,7 @@ class DetailFoodFragment : Fragment() {
                     viewModel.meal = meal
 
                     cartViewModel = ViewModelProviders.of(requireActivity()).get(CartViewModel::class.java)
-                    val cart = Cart(0, meal.name, "titiz")
+                    val cart = Cart(0, meal.name, args.restaurantName, meal.image, meal.price, args.restaurantId, meal.id)
 
                     binding.addToCart.setOnClickListener {
                         cartViewModel.insertCart(cart)
@@ -81,7 +81,6 @@ class DetailFoodFragment : Fragment() {
                     binding.mealNameTextView.text = meal.name
                     binding.mealDescription.text = meal.description
                     binding.mealPrice.text = meal.price
-
 
                     adapter.setIngredientList(meal.ingredients)
                     binding.ingredientsRecyclerView.adapter = adapter

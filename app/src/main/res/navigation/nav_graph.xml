@@ -46,6 +46,9 @@
         <argument
             android:name="restaurantId"
             app:argType="string" />
+        <argument
+            android:name="restaurantName"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"

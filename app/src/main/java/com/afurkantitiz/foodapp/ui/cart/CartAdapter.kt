@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.afurkantitiz.foodapp.data.entity.Cart
 import com.afurkantitiz.foodapp.databinding.ItemCartCardBinding
+import com.bumptech.glide.Glide
 
 class CartAdapter: RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     private lateinit var carts: List<Cart>
@@ -20,12 +21,13 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
         holder.binding.apply {
             itemCartRestaurantName.text = cart.restaurantName
             itemCardFoodName.text = cart.mealName
+            itemCartFoodPrice.text = cart.foodPrice + " $"
         }
 
-       /* Glide
+        Glide
             .with(holder.binding.itemCartFoodImageView.context)
-            .load(cart.)
-            .into(holder.binding.itemMealsImageView)*/
+            .load(cart.foodImage)
+            .into(holder.binding.itemCartFoodImageView)
     }
 
     fun setCarts(carts: List<Cart>){

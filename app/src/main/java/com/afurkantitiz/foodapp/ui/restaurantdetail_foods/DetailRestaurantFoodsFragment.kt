@@ -68,7 +68,7 @@ class DetailRestaurantFoodsFragment : Fragment() {
                     binding.collapseLayout.show()
 
                     val restaurant = it.data!!.data
-                    setMealsAdapter(restaurant.meals, restaurant.id)
+                    setMealsAdapter(restaurant.meals, restaurant.id, restaurant.name)
 
                     Glide.with(binding.restaurantImageView.context)
                         .load(restaurant.image)
@@ -88,8 +88,8 @@ class DetailRestaurantFoodsFragment : Fragment() {
     }
 
 
-    private fun setMealsAdapter(mealList: List<Meal>, restaurantId: String) {
-        adapter.setMealList(mealList, restaurantId)
+    private fun setMealsAdapter(mealList: List<Meal>, restaurantId: String, restaurantName: String) {
+        adapter.setMealList(mealList, restaurantId, restaurantName)
         binding.mealsRecyclerView.adapter = adapter
     }
 
