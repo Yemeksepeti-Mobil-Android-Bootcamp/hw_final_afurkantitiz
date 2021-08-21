@@ -52,8 +52,9 @@ class SignUpFragment : Fragment() {
         val name = binding.signUpNameEditText.text.toString()
         val email = binding.signUpEmailEditText.text.toString()
         val password = binding.signUpPasswordEditText.text.toString()
+        val imageUrl = "https://e7.pngegg.com/pngimages/981/645/png-clipart-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette-thumbnail.png"
 
-        viewModel.register(name, email, password).observe(viewLifecycleOwner, {
+        viewModel.register(name, email, password, imageUrl).observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     binding.progressBar.show()

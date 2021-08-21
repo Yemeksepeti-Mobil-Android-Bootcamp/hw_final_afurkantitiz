@@ -2,6 +2,8 @@ package com.afurkantitiz.foodapp.data.remote
 
 import com.afurkantitiz.foodapp.data.entity.food.MealResponse
 import com.afurkantitiz.foodapp.data.entity.order.OrderResponse
+import com.afurkantitiz.foodapp.data.entity.profile.User
+import com.afurkantitiz.foodapp.data.entity.profile.UserRequest
 import com.afurkantitiz.foodapp.data.entity.profile.UserResponse
 import com.afurkantitiz.foodapp.data.entity.restaurant.RestaurantListResponse
 import com.afurkantitiz.foodapp.data.entity.restaurant.RestaurantResponse
@@ -10,10 +12,7 @@ import com.afurkantitiz.foodapp.data.entity.signin.SignInResponse
 import com.afurkantitiz.foodapp.data.entity.signup.SignUpRequest
 import com.afurkantitiz.foodapp.data.entity.signup.SignUpResponse
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface APIService {
     @POST("auth/login")
@@ -33,6 +32,9 @@ interface APIService {
 
     @GET("auth/profile")
     suspend fun getUser() : Response<UserResponse>
+
+    @PUT("auth/updateDetails")
+    suspend fun updateUser(@Body request : UserRequest) : Response<User>
 
     @GET("a/order")
     suspend fun getOrders(): Response<OrderResponse>

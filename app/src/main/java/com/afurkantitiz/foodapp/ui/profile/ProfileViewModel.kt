@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.afurkantitiz.foodapp.data.ApiRepository
+import com.afurkantitiz.foodapp.data.entity.profile.User
+import com.afurkantitiz.foodapp.data.entity.profile.UserRequest
 import com.afurkantitiz.foodapp.data.entity.profile.UserResponse
 import com.afurkantitiz.foodapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,4 +18,6 @@ class ProfileViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun getUser(): LiveData<Resource<UserResponse>> = apiRepository.getUser()
+
+    fun updateUser(userRequest: UserRequest): LiveData<Resource<User>> = apiRepository.updateUser(userRequest)
 }

@@ -1,5 +1,6 @@
 package com.afurkantitiz.foodapp.data.remote
 
+import com.afurkantitiz.foodapp.data.entity.profile.UserRequest
 import com.afurkantitiz.foodapp.data.entity.signin.SignInRequest
 import com.afurkantitiz.foodapp.data.entity.signup.SignUpRequest
 import com.afurkantitiz.foodapp.utils.BaseDataSource
@@ -24,6 +25,8 @@ class RemoteDataSource @Inject constructor(private val apiService: APIService): 
     suspend fun getMealById(id: String) = getResult { apiService.getMealById(id) }
 
     suspend fun getUser() = getResult { apiService.getUser() }
+
+    suspend fun updateUser(request : UserRequest) = getResult { apiService.updateUser(request) }
 
     suspend fun getOrders() = getResult { apiService.getOrders() }
 }

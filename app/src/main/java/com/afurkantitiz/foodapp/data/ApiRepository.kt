@@ -1,5 +1,6 @@
 package com.afurkantitiz.foodapp.data
 
+import com.afurkantitiz.foodapp.data.entity.profile.UserRequest
 import com.afurkantitiz.foodapp.data.entity.signin.SignInRequest
 import com.afurkantitiz.foodapp.data.entity.signup.SignUpRequest
 import com.afurkantitiz.foodapp.data.local.LocalDataSource
@@ -52,6 +53,10 @@ class ApiRepository @Inject constructor(
 
     fun getUser() = performNetworkOperation {
         remoteDataSource.getUser()
+    }
+
+    fun updateUser(user : UserRequest) = performNetworkOperation {
+        remoteDataSource.updateUser(request = user)
     }
 
     fun getOrder() = performNetworkOperation {

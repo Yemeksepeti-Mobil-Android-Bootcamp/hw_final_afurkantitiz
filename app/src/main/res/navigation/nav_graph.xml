@@ -30,7 +30,11 @@
         android:id="@+id/profileFragment"
         android:name="com.afurkantitiz.foodapp.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_self"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailMealFragment"
         android:name="com.afurkantitiz.foodapp.ui.fooddetail.DetailFoodFragment"
