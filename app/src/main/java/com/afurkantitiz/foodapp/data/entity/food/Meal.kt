@@ -1,4 +1,4 @@
-package com.afurkantitiz.foodapp.data.entity.meal
+package com.afurkantitiz.foodapp.data.entity.food
 
 import com.google.gson.annotations.SerializedName
 

@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afurkantitiz.foodapp.data.entity.Cart
 import com.afurkantitiz.foodapp.databinding.FragmentDetailMealBinding
+import com.afurkantitiz.foodapp.ui.cart.CartViewModel
 import com.afurkantitiz.foodapp.utils.Resource
 import com.afurkantitiz.foodapp.utils.gone
 import com.afurkantitiz.foodapp.utils.show
@@ -23,6 +26,7 @@ class DetailFoodFragment : Fragment() {
 
     private val args: DetailFoodFragmentArgs by navArgs()
     private val viewModel: DetailFoodViewModel by viewModels()
+    private lateinit var cartViewModel: CartViewModel
 
     private var adapter: DetailFoodAdapter = DetailFoodAdapter()
 
@@ -39,11 +43,19 @@ class DetailFoodFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.ingredientsRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
         getMealDetails()
+        onClickListener()
+    }
+
+    private fun onClickListener() {
+        binding.backButton.setOnClickListener {
+            it.findNavController().popBackStack()
+        }
     }
 
     private fun getMealDetails() {
-        viewModel.getMealDetails(args.mealId).observe(viewLifecycleOwner, { it ->
+        viewModel.getMealDetails(args.mealId).observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     binding.progressBar.show()
@@ -53,6 +65,13 @@ class DetailFoodFragment : Fragment() {
 
                     val meal = it.data!!.data
                     viewModel.meal = meal
+
+                    cartViewModel = ViewModelProviders.of(requireActivity()).get(CartViewModel::class.java)
+                    val cart = Cart(0, meal.name, "titiz")
+
+                    binding.addToCart.setOnClickListener {
+                        cartViewModel.insertCart(cart)
+                    }
 
                     Glide
                         .with(requireContext())
@@ -66,10 +85,6 @@ class DetailFoodFragment : Fragment() {
 
                     adapter.setIngredientList(meal.ingredients)
                     binding.ingredientsRecyclerView.adapter = adapter
-
-                    binding.backButton.setOnClickListener {
-                        it.findNavController().popBackStack()
-                    }
                 }
                 Resource.Status.ERROR -> {
                     binding.progressBar.show()

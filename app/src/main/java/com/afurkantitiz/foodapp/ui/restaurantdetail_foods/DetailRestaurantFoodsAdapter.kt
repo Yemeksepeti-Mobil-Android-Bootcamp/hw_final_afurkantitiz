@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.afurkantitiz.foodapp.data.entity.meal.Meal
+import com.afurkantitiz.foodapp.data.entity.food.Meal
 import com.afurkantitiz.foodapp.databinding.ItemMealCardBinding
 import com.bumptech.glide.Glide
 

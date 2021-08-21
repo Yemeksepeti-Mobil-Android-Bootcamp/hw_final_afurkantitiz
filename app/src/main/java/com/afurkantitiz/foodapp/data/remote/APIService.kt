@@ -1,6 +1,6 @@
 package com.afurkantitiz.foodapp.data.remote
 
-import com.afurkantitiz.foodapp.data.entity.meal.MealResponse
+import com.afurkantitiz.foodapp.data.entity.food.MealResponse
 import com.afurkantitiz.foodapp.data.entity.order.OrderResponse
 import com.afurkantitiz.foodapp.data.entity.profile.UserResponse
 import com.afurkantitiz.foodapp.data.entity.restaurant.RestaurantListResponse

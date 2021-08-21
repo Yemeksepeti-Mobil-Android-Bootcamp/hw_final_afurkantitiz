@@ -118,7 +118,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_regular"
-                                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"
+                                tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"
                                 android:textColor="@color/black" />
                      </LinearLayout>
 
@@ -131,31 +131,6 @@
                          app:layout_constraintEnd_toEndOf="parent"
                          app:layout_constraintStart_toStartOf="parent"
                          app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-                     <!--<LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_margin="@dimen/_16sdp"
-                         android:gravity="center"
-                         android:orientation="horizontal"
-                         app:layout_constraintEnd_toEndOf="parent"
-                         app:layout_constraintStart_toStartOf="parent"
-                         tools:layout_editor_absoluteY="236dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Total Price : "
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_20ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_20ssp"
-                                tools:text="252 " />
-                     </LinearLayout>-->
 
                      <LinearLayout
                          android:id="@+id/linearLayout"
@@ -180,12 +155,27 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_4sdp"
                                 android:fontFamily="@font/poppins_bold"
-                                android:text="5.99"
+                                tools:text="5.99"
                                 android:textColor="@color/red"
                                 android:textSize="@dimen/_18ssp" />
                      </LinearLayout>
               </androidx.constraintlayout.widget.ConstraintLayout>
-
        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+       <androidx.cardview.widget.CardView
+           android:id="@+id/addToCart"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_margin="@dimen/_16sdp"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent">
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Add to Cart"
+                  android:textSize="@dimen/_16ssp" />
+       </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

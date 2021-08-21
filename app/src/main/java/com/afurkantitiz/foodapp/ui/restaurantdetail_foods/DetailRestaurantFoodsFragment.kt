@@ -9,13 +9,19 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import com.afurkantitiz.foodapp.data.entity.meal.Meal
+import com.afurkantitiz.foodapp.data.entity.food.Meal
 import com.afurkantitiz.foodapp.databinding.FragmentDetailRestaurantBinding
 import com.afurkantitiz.foodapp.utils.Resource
 import com.afurkantitiz.foodapp.utils.gone
 import com.afurkantitiz.foodapp.utils.show
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import android.content.Context.MODE_PRIVATE
+
+import android.content.SharedPreferences
+
+
+
 
 @AndroidEntryPoint
 class DetailRestaurantFoodsFragment : Fragment() {

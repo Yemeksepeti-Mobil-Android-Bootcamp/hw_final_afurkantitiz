@@ -1,6 +1,6 @@
 package com.afurkantitiz.foodapp.data.entity.order
 
-import com.afurkantitiz.foodapp.data.entity.meal.Meal
+import com.afurkantitiz.foodapp.data.entity.food.Meal
 import com.google.gson.annotations.SerializedName
 import java.util.*
 

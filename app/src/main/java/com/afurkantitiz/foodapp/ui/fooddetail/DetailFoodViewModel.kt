@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.afurkantitiz.foodapp.data.ApiRepository
-import com.afurkantitiz.foodapp.data.entity.meal.Meal
-import com.afurkantitiz.foodapp.data.entity.meal.MealResponse
+import com.afurkantitiz.foodapp.data.entity.food.Meal
+import com.afurkantitiz.foodapp.data.entity.food.MealResponse
 import com.afurkantitiz.foodapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

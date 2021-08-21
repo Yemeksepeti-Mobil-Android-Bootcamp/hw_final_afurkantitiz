@@ -1,6 +1,6 @@
 package com.afurkantitiz.foodapp.data.entity.restaurant
 
-import com.afurkantitiz.foodapp.data.entity.meal.Meal
+import com.afurkantitiz.foodapp.data.entity.food.Meal
 import com.google.gson.annotations.SerializedName
 
 data class Restaurant(
@@ -29,4 +29,6 @@ data class Restaurant(
     @SerializedName("cuisine")
     val cuisine: String,
     @SerializedName("district")
-    val district: String)
+    val district: String,
+    @SerializedName("rating")
+    val rating: Double)
