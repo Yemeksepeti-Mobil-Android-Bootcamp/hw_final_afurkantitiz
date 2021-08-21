@@ -1,14 +1,15 @@
 package com.afurkantitiz.foodapp.ui.cart
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.room.Room
 import com.afurkantitiz.foodapp.data.ApiRepository
-import com.afurkantitiz.foodapp.data.entity.Cart
+import com.afurkantitiz.foodapp.data.entity.cart.Cart
+import com.afurkantitiz.foodapp.data.entity.cart.CartRequest
+import com.afurkantitiz.foodapp.data.entity.cart.CartResponse
 import com.afurkantitiz.foodapp.data.local.RoomDb
+import com.afurkantitiz.foodapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -29,5 +30,12 @@ class CartViewModel@Inject constructor(
         val cartDao = RoomDb.getAppDatabase(app)?.cartDao()
         cartDao?.insertCart(cart)
         getAllCart()
+    }
+
+    fun addOrderBulk(
+        restaurantId: String,
+        foodId: ArrayList<String>) :LiveData<Resource<CartResponse>>{
+        val request = CartRequest(restaurantId, foodId)
+        return apiRepository.postOrders(request)
     }
 }

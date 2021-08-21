@@ -5,11 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.afurkantitiz.foodapp.data.entity.Cart
+import com.afurkantitiz.foodapp.R
 import com.afurkantitiz.foodapp.databinding.FragmentCartBinding
+import com.afurkantitiz.foodapp.utils.Resource
+import com.afurkantitiz.foodapp.utils.gone
+import com.afurkantitiz.foodapp.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +23,8 @@ class CartFragment : Fragment() {
 
     private var cartAdapter: CartAdapter = CartAdapter()
     private lateinit var viewModel: CartViewModel
+    private var foodIdList: ArrayList<String> = ArrayList()
+    private lateinit var restaurantId: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,8 +46,34 @@ class CartFragment : Fragment() {
             adapter = cartAdapter
         }
 
+        onClickListener()
+
         cartAdapter.setCarts(viewModel.allCarts)
         cartAdapter.notifyDataSetChanged()
+    }
+
+    private fun onClickListener() {
+        for (cart in viewModel.allCarts){
+            foodIdList.add(cart.foodId)
+            restaurantId = cart.restaurantId
+        }
+
+        binding.confirmButton.setOnClickListener {
+            viewModel.addOrderBulk(restaurantId, foodIdList).observe(viewLifecycleOwner, {
+                when (it.status) {
+                    Resource.Status.LOADING -> {
+                        binding.progressBar.show()
+                    }
+                    Resource.Status.SUCCESS -> {
+                        binding.progressBar.gone()
+                        Toast.makeText(requireContext(), "Cart Confirm Success", Toast.LENGTH_SHORT).show()
+                    }
+                    Resource.Status.ERROR -> {
+                        binding.progressBar.show()
+                    }
+                }
+            })
+        }
     }
 
     override fun onDestroyView() {

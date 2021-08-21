@@ -1,4 +1,4 @@
-package com.afurkantitiz.foodapp.data.entity
+package com.afurkantitiz.foodapp.data.entity.cart
 
 import androidx.room.*
 import com.afurkantitiz.foodapp.data.entity.food.Meal

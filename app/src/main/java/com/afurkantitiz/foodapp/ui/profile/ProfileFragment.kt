@@ -1,6 +1,7 @@
 package com.afurkantitiz.foodapp.ui.profile
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.afurkantitiz.foodapp.R
 import com.afurkantitiz.foodapp.databinding.FragmentProfileBinding
 import com.afurkantitiz.foodapp.utils.Resource
@@ -22,6 +24,7 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: ProfileViewModel by viewModels()
+    private var adapter = OrderAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +40,7 @@ class ProfileFragment : Fragment() {
 
         getProfileData()
         onClickListener()
+        getOrderForAPI()
     }
 
     private fun onClickListener() {
@@ -76,6 +80,25 @@ class ProfileFragment : Fragment() {
                 }
                 Resource.Status.ERROR -> {
                     binding.progressBar.show()
+                }
+            }
+        })
+    }
+
+    private fun getOrderForAPI(){
+        viewModel.getOrders().observe(viewLifecycleOwner, { response ->
+            when (response.status) {
+                Resource.Status.LOADING -> binding.progressBar.show()
+                Resource.Status.SUCCESS -> {
+                    response.data?.orderList?.let {
+                        binding.ordersRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                        binding.ordersRecyclerView.adapter = adapter
+                        adapter.setData(it)
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    Log.v("order", "$response")
+                    binding.progressBar.gone()
                 }
             }
         })

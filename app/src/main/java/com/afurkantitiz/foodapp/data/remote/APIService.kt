@@ -1,7 +1,9 @@
 package com.afurkantitiz.foodapp.data.remote
 
+import com.afurkantitiz.foodapp.data.entity.cart.CartRequest
+import com.afurkantitiz.foodapp.data.entity.cart.CartResponse
 import com.afurkantitiz.foodapp.data.entity.food.MealResponse
-import com.afurkantitiz.foodapp.data.entity.order.OrderResponse
+import com.afurkantitiz.foodapp.data.entity.order.OrderListResponse
 import com.afurkantitiz.foodapp.data.entity.profile.User
 import com.afurkantitiz.foodapp.data.entity.profile.UserRequest
 import com.afurkantitiz.foodapp.data.entity.profile.UserResponse
@@ -36,9 +38,12 @@ interface APIService {
     @PUT("auth/updateDetails")
     suspend fun updateUser(@Body request : UserRequest) : Response<User>
 
-    @GET("a/order")
-    suspend fun getOrders(): Response<OrderResponse>
+    @GET("a/order/bulk")
+    suspend fun getOrders(): Response<OrderListResponse>
 
     @POST("auth/register")
     suspend fun register(@Body request: SignUpRequest): Response<SignUpResponse>
+
+    @POST("a/order/bulk")
+    suspend fun postOrders(@Body request: CartRequest): Response<CartResponse>
 }

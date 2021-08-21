@@ -2,12 +2,12 @@ package com.afurkantitiz.foodapp.data.local
 
 import android.content.Context
 import androidx.room.*
-import com.afurkantitiz.foodapp.data.entity.Cart
+import com.afurkantitiz.foodapp.data.entity.cart.Cart
 
 @Database(entities = [Cart::class], version = 1)
 abstract class RoomDb : RoomDatabase(){
 
-   abstract fun cartDao(): ICartDao?
+   abstract fun cartDao(): CartDao?
 
     companion object{
         private var INSTANCE: RoomDb?= null

@@ -3,7 +3,7 @@ package com.afurkantitiz.foodapp.ui.cart
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.afurkantitiz.foodapp.data.entity.Cart
+import com.afurkantitiz.foodapp.data.entity.cart.Cart
 import com.afurkantitiz.foodapp.databinding.ItemCartCardBinding
 import com.bumptech.glide.Glide
 

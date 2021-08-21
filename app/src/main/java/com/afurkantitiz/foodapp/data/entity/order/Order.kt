@@ -5,14 +5,13 @@ import com.google.gson.annotations.SerializedName
 import java.util.*
 
 data class Order(
-    @SerializedName("_id")
-    val id: String,
     @SerializedName("createdDate")
     val createdDate: Date,
-    @SerializedName("meal")
-    val meal: Meal,
+    @SerializedName("_id")
+    val id: String,
+    @SerializedName("meals")
+    val meals: List<Meal>,
     @SerializedName("restaurant")
     val restaurant: OrderRestaurant,
-    @SerializedName("price")
-    val price: Double
-)
+    @SerializedName("user")
+    val user: String)

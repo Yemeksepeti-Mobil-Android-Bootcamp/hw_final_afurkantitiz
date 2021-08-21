@@ -65,7 +65,7 @@ class ProfileUpdateFragment() : BottomSheetDialogFragment() {
         })
     }
 
-    fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
+    private fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
 
     private fun onClickListener() {
         binding.updateButton.setOnClickListener {

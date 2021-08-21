@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.afurkantitiz.foodapp.data.ApiRepository
+import com.afurkantitiz.foodapp.data.entity.order.OrderListResponse
 import com.afurkantitiz.foodapp.data.entity.profile.User
 import com.afurkantitiz.foodapp.data.entity.profile.UserRequest
 import com.afurkantitiz.foodapp.data.entity.profile.UserResponse
@@ -20,4 +21,6 @@ class ProfileViewModel @Inject constructor(
     fun getUser(): LiveData<Resource<UserResponse>> = apiRepository.getUser()
 
     fun updateUser(userRequest: UserRequest): LiveData<Resource<User>> = apiRepository.updateUser(userRequest)
+
+    fun getOrders(): LiveData<Resource<OrderListResponse>> = apiRepository.getOrder()
 }

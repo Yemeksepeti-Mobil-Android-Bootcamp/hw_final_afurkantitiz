@@ -1,64 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginHorizontal="@dimen/_8sdp"
     android:layout_marginBottom="@dimen/_8sdp"
     android:layout_marginTop="@dimen/_10sdp"
-    app:contentPadding="@dimen/_4sdp"
+    app:contentPadding="@dimen/_8sdp"
     app:cardCornerRadius="@dimen/_16sdp"
     app:cardElevation="@dimen/_4sdp"
-    android:id="@+id/itemMealsCardView"
+    android:id="@+id/itemOrderCardView"
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/itemMealImageView"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
-            android:maxWidth="@dimen/_60sdp"
-            android:maxHeight="@dimen/_60sdp"
-            android:layout_marginStart="@dimen/_8sdp"/>
-        
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="vertical">
+            <ImageView
+                android:id="@+id/orderRestaurantImage"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:maxWidth="@dimen/_60sdp"
+                android:maxHeight="@dimen/_60sdp"
+                android:layout_marginStart="@dimen/_8sdp"/>
+
             <TextView
-                android:id="@+id/itemMealTitle"
+                android:id="@+id/orderRestaurantName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Herbal Pancake"
                 android:textSize="@dimen/_16ssp"
                 android:fontFamily="@font/benton_sans_bold"
                 android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/itemMealSubTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Warung Herbal"
-                android:textSize="@dimen/_14ssp"
-                android:fontFamily="@font/benton_sans_medium"
-                android:textColor="#8E8888" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="end"
-            android:text="$7"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:textSize="@dimen/_20ssp"
-            android:textColor="#FEAD1D"
-            android:fontFamily="@font/benton_sans_bold"/>
+            android:layout_marginStart="@dimen/_16sdp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Quantity Count : "
+                    android:textColor="@color/gray1"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/orderQuantityCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp"
+                    tools:text="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Order Date : "
+                    android:textColor="@color/gray1"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/orderDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp"
+                    tools:text="Herbal Pancake" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

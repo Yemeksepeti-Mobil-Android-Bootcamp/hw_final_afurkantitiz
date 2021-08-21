@@ -1,5 +1,6 @@
 package com.afurkantitiz.foodapp.data.remote
 
+import com.afurkantitiz.foodapp.data.entity.cart.CartRequest
 import com.afurkantitiz.foodapp.data.entity.profile.UserRequest
 import com.afurkantitiz.foodapp.data.entity.signin.SignInRequest
 import com.afurkantitiz.foodapp.data.entity.signup.SignUpRequest
@@ -29,4 +30,8 @@ class RemoteDataSource @Inject constructor(private val apiService: APIService): 
     suspend fun updateUser(request : UserRequest) = getResult { apiService.updateUser(request) }
 
     suspend fun getOrders() = getResult { apiService.getOrders() }
+
+    suspend fun postOrders(request: CartRequest) = getResult {
+        apiService.postOrders(request)
+    }
 }

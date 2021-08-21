@@ -4,10 +4,10 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.afurkantitiz.foodapp.data.entity.Cart
+import com.afurkantitiz.foodapp.data.entity.cart.Cart
 
 @Dao
-interface ICartDao {
+interface CartDao {
     @Query("SELECT * FROM cartInfo ORDER BY id DESC")
     fun getCarts(): List<Cart>
 

@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.afurkantitiz.foodapp.data.entity.Cart
+import com.afurkantitiz.foodapp.data.entity.cart.Cart
 import com.afurkantitiz.foodapp.databinding.FragmentDetailMealBinding
 import com.afurkantitiz.foodapp.ui.cart.CartViewModel
 import com.afurkantitiz.foodapp.utils.Resource

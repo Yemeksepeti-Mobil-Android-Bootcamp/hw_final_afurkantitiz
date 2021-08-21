@@ -1,5 +1,6 @@
 package com.afurkantitiz.foodapp.data
 
+import com.afurkantitiz.foodapp.data.entity.cart.CartRequest
 import com.afurkantitiz.foodapp.data.entity.profile.UserRequest
 import com.afurkantitiz.foodapp.data.entity.signin.SignInRequest
 import com.afurkantitiz.foodapp.data.entity.signup.SignUpRequest
@@ -30,6 +31,11 @@ class ApiRepository @Inject constructor(
             localDataSource.saveToken(it)
         }
     )
+
+    fun postOrders(request: CartRequest) =
+        performNetworkOperation {
+            remoteDataSource.postOrders(request)
+        }
 
     fun getRestaurants() =
         performNetworkOperation {
