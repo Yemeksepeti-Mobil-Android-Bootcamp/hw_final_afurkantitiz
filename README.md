@@ -8,6 +8,7 @@
 - Kotlin Coroutine
 - ViewModel - LiveData
 - Gson
+- JWT Decode
 - Lottie Animations
 - RecyclerView
 - Fragments
