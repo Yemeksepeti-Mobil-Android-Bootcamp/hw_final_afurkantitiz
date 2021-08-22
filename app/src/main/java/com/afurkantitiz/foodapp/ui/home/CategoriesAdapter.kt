@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.afurkantitiz.foodapp.R
 import com.afurkantitiz.foodapp.data.entity.Categories
 import com.afurkantitiz.foodapp.databinding.ItemCategoriesCardBinding
+import com.bumptech.glide.Glide
 
 class CategoriesAdapter(private val categoriesList: ArrayList<Categories>, private val mContext: Context)
     : RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>(){
@@ -26,11 +27,17 @@ class CategoriesAdapter(private val categoriesList: ArrayList<Categories>, priva
 
         holder.binding.itemCategoriesName.text = categories.categoryName
 
+        Glide
+            .with(holder.binding.itemCategoriesImageView.context)
+            .load(categories.categoryIcon)
+            .into(holder.binding.itemCategoriesImageView)
+
         if (position == selectedItem){
             holder.binding.itemCategoriesCardView.animate().scaleX(1.1f)
             holder.binding.itemCategoriesCardView.animate().scaleY(1.1f)
             holder.binding.itemCategoriesCardView.outlineSpotShadowColor = mContext.getColor(R.color.red)
             holder.binding.itemCategoriesCardView.outlineAmbientShadowColor = mContext.getColor(R.color.red)
+            holder.binding.itemCategoriesImageView.setColorFilter(mContext.getColor(R.color.red))
             holder.binding.itemCategoriesName.setTextColor(mContext.getColor(R.color.red))
         }else {
             holder.binding.itemCategoriesCardView.animate().scaleX(1f)
@@ -38,6 +45,7 @@ class CategoriesAdapter(private val categoriesList: ArrayList<Categories>, priva
             holder.binding.itemCategoriesCardView.outlineSpotShadowColor = mContext.getColor(R.color.gray1)
             holder.binding.itemCategoriesCardView.outlineAmbientShadowColor = mContext.getColor(R.color.gray)
             holder.binding.itemCategoriesName.setTextColor(mContext.getColor(R.color.black))
+            holder.binding.itemCategoriesImageView.setColorFilter(mContext.getColor(R.color.gray1))
         }
 
         holder.binding.itemCategoriesCardView.setOnClickListener{

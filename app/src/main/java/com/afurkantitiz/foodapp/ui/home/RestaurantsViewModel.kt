@@ -3,6 +3,7 @@ package com.afurkantitiz.foodapp.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.afurkantitiz.foodapp.R
 import com.afurkantitiz.foodapp.data.ApiRepository
 import com.afurkantitiz.foodapp.data.entity.Categories
 import com.afurkantitiz.foodapp.data.entity.restaurant.Restaurant
@@ -28,15 +29,13 @@ class RestaurantsViewModel @Inject constructor(
 
     fun getCategories(): ArrayList<Categories>{
         return arrayListOf(
-            Categories("All"),
-            Categories("Burger"),
-            Categories("Doner"),
-            Categories("Worldwide"),
-            Categories("Homemade"),
-            Categories("Breakfast"),
-            Categories("Kebab"),
-            Categories("Pizza"),
-            Categories("Dessert")
+            Categories("All", R.drawable.ic_dish),
+            Categories("Burger", R.drawable.ic_burger),
+            Categories("Cake", R.drawable.ic_cake),
+            Categories("Chicken", R.drawable.ic_chicken),
+            Categories("Pizza", R.drawable.ic_pizza_slice),
+            Categories("Skewer", R.drawable.ic_skewer),
+            Categories("Soup", R.drawable.ic_soup)
         )
     }
 
