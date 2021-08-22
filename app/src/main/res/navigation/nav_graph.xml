@@ -16,6 +16,9 @@
         <argument
             android:name="restaurantId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_detailRestaurantFragment_self"
+            app:destination="@id/detailRestaurantFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

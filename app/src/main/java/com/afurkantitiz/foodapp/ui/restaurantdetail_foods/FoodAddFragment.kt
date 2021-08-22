@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.afurkantitiz.foodapp.data.entity.food.Ingredient
 import com.afurkantitiz.foodapp.databinding.FragmentFoodAddBinding
+import com.afurkantitiz.foodapp.ui.home.RestaurantsFragmentDirections
 import com.afurkantitiz.foodapp.utils.Resource
 import com.afurkantitiz.foodapp.utils.gone
 import com.afurkantitiz.foodapp.utils.show
@@ -72,6 +75,7 @@ class FoodAddFragment(restaurantId: String) : BottomSheetDialogFragment() {
     private fun addMeal() {
         val ingredients: ArrayList<String> = arrayListOf()
         val name = binding.mealNameEditText.editText?.text.toString()
+        val image = binding.mealImageLayout.editText?.text.toString()
         val description = binding.mealDescriptionLayout.editText?.text.toString()
         val price = binding.mealPriceEditText.editText?.text.toString().toDouble()
 
@@ -82,7 +86,7 @@ class FoodAddFragment(restaurantId: String) : BottomSheetDialogFragment() {
         viewModel.addMeal(
             restId,
             name,
-            "https://www.publicdomainpictures.net/pictures/320000/velka/background-image.png",
+            image,
             price,
             ingredients as List<String>,
             description
@@ -94,6 +98,11 @@ class FoodAddFragment(restaurantId: String) : BottomSheetDialogFragment() {
                 Resource.Status.SUCCESS -> {
                     binding.progressBar.gone()
                     this.dismiss()
+                    val action =
+                        DetailRestaurantFoodsFragmentDirections.actionDetailRestaurantFragmentSelf(
+                            restId
+                        )
+                    findNavController().navigate(action)
                 }
                 Resource.Status.ERROR -> {
                     binding.progressBar.gone()
