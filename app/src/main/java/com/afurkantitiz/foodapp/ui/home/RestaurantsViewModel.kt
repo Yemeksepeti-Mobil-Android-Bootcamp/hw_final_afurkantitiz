@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.afurkantitiz.foodapp.R
 import com.afurkantitiz.foodapp.data.ApiRepository
 import com.afurkantitiz.foodapp.data.entity.Categories
+import com.afurkantitiz.foodapp.data.entity.profile.UserResponse
 import com.afurkantitiz.foodapp.data.entity.restaurant.Restaurant
 import com.afurkantitiz.foodapp.data.entity.restaurant.RestaurantListResponse
 import com.afurkantitiz.foodapp.data.entity.restaurantadd.RestaurantAddRequest
@@ -27,7 +28,7 @@ class RestaurantsViewModel @Inject constructor(
     fun getRestaurantByCuisine(cuisine: String): LiveData<Resource<RestaurantListResponse>> =
         apiRepository.getRestaurantByCuisine(cuisine)
 
-    fun getCategories(): ArrayList<Categories>{
+    fun getCategories(): ArrayList<Categories> {
         return arrayListOf(
             Categories("All", R.drawable.ic_dish),
             Categories("Burger", R.drawable.ic_burger),
@@ -64,12 +65,23 @@ class RestaurantsViewModel @Inject constructor(
         paymentMethods: String,
         rating: Double,
         imageUrl: String
-        ): LiveData<Resource<RestaurantAddResponse>> {
+    ): LiveData<Resource<RestaurantAddResponse>> {
 
         val request = RestaurantAddRequest(
-            name, cuisine, deliveryInfo, deliveryTime, address, district, minDeliveryFee, paymentMethods, rating, imageUrl)
+            name,
+            cuisine,
+            deliveryInfo,
+            deliveryTime,
+            address,
+            district,
+            minDeliveryFee,
+            paymentMethods,
+            rating,
+            imageUrl
+        )
 
         return apiRepository.postRestaurant(request)
-
     }
+
+    fun getUser(): LiveData<Resource<UserResponse>> = apiRepository.getUser()
 }

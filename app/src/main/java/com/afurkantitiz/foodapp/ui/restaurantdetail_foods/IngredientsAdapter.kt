@@ -4,11 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.afurkantitiz.foodapp.data.entity.food.Ingredient
-import com.afurkantitiz.foodapp.data.entity.order.Order
 import com.afurkantitiz.foodapp.databinding.ItemAddIngredientCardBinding
-import com.afurkantitiz.foodapp.databinding.ItemOrderCardBinding
 
-class IngredientsAdapter(private val ingredientList: MutableList<Ingredient>) : RecyclerView.Adapter<IngredientsAdapter.IngredientViewHolder>() {
+class IngredientsAdapter(private val ingredientList: MutableList<Ingredient>) :
+    RecyclerView.Adapter<IngredientsAdapter.IngredientViewHolder>() {
     private var ingredientClickListener: IIngredientOnClick? = null
 
     override fun onCreateViewHolder(

@@ -7,7 +7,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.afurkantitiz.foodapp.R
 import com.afurkantitiz.foodapp.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

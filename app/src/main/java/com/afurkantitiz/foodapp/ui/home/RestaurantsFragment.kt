@@ -1,12 +1,13 @@
 package com.afurkantitiz.foodapp.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,6 +17,7 @@ import com.afurkantitiz.foodapp.data.entity.restaurant.Restaurant
 import com.afurkantitiz.foodapp.databinding.FragmentRestaurantsBinding
 import com.afurkantitiz.foodapp.utils.Resource
 import com.afurkantitiz.foodapp.utils.gone
+import com.afurkantitiz.foodapp.utils.hide
 import com.afurkantitiz.foodapp.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +29,7 @@ class RestaurantsFragment : Fragment(), ICategoriesOnClick {
     private val viewModel: RestaurantsViewModel by viewModels()
     private var restaurantsAdapter = RestaurantsAdapter()
     private lateinit var categoriesAdapter: CategoriesAdapter
+    private lateinit var currentRole: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,42 +43,11 @@ class RestaurantsFragment : Fragment(), ICategoriesOnClick {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.restaurantAddButton.setOnClickListener {
-            val restaurantAddFragment = RestaurantAddFragment()
-            restaurantAddFragment.setStyle(
-                DialogFragment.STYLE_NORMAL,
-                R.style.ThemeOverlay_Demo_BottomSheetDialog)
-            restaurantAddFragment.show(requireActivity().supportFragmentManager, "RestaurantAddBottomSheet")
-        }
-
-        getRestaurants()
-        onSearchViewListener()
-    }
-
-    private fun onSearchViewListener() {
-        binding.listRestaurantSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                val filterList = viewModel.searchViewForRestaurants(query)
-                setRestaurants(filterList)
-                return true
-            }
-
-            override fun onQueryTextChange(query: String?): Boolean {
-                val filterList = viewModel.searchViewForRestaurants(query)
-                setRestaurants(filterList)
-                return true
-            }
-        })
-    }
-
     private fun initViews() {
         categoriesAdapter = CategoriesAdapter(viewModel.getCategories(), requireContext())
         categoriesAdapter.addListener(this)
 
-        binding.listRestaurantRestaurantsRecyclerView.layoutManager = GridLayoutManager(context, 2)
+        binding.restaurantRecyclerView.layoutManager = GridLayoutManager(context, 2)
 
         binding.categoryRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -83,53 +55,123 @@ class RestaurantsFragment : Fragment(), ICategoriesOnClick {
         binding.categoryRecyclerView.adapter = categoriesAdapter
     }
 
-    private fun getRestaurants(){
-        viewModel.getRestaurants().observe(viewLifecycleOwner, {
-            when (it.status) {
-                Resource.Status.LOADING -> binding.progressBar.show()
-                Resource.Status.SUCCESS -> {
-                    viewModel.restaurantList = it.data?.restaurantList
-                    setRestaurants(viewModel.restaurantList)
-                }
-                Resource.Status.ERROR -> binding.progressBar.show()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        getUserForAPI()
+        onSearchViewListener()
+        onClickListener()
+        getRestaurantsForAPI()
+    }
+
+    private fun onClickListener() {
+        binding.restaurantAddButton.setOnClickListener {
+            val restaurantAddFragment = RestaurantAddFragment()
+            restaurantAddFragment.setStyle(
+                DialogFragment.STYLE_NORMAL,
+                R.style.ThemeOverlay_Demo_BottomSheetDialog
+            )
+            restaurantAddFragment.show(
+                requireActivity().supportFragmentManager,
+                "RestaurantAddBottomSheet"
+            )
+        }
+    }
+
+    private fun onSearchViewListener() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val filterList = viewModel.searchViewForRestaurants(query)
+                setRestaurantsForRestaurantAdapter(filterList)
+                return true
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                val filterList = viewModel.searchViewForRestaurants(query)
+                setRestaurantsForRestaurantAdapter(filterList)
+                return true
             }
         })
     }
 
-    private fun getCategoriesByRestaurants(currentPosition: Int) {
-        if (currentPosition == 0){
-            getRestaurants()
-        }else {
-            viewModel.getRestaurantByCuisine(viewModel.getCategories()[currentPosition].categoryName).observe(viewLifecycleOwner, { response ->
-                when (response.status) {
-                    Resource.Status.LOADING -> binding.progressBar.show()
-                    Resource.Status.SUCCESS -> {
-                        viewModel.restaurantList = response.data?.restaurantList
-                        setRestaurants(response.data?.restaurantList)
-                    }
-                    Resource.Status.ERROR -> isRestaurantListVisible(false)
+    private fun getRestaurantsForAPI() {
+        viewModel.getRestaurants().observe(viewLifecycleOwner, { response ->
+            when (response.status) {
+                Resource.Status.LOADING -> {
+                    binding.lottieLoading.show()
+                    binding.lottieLoading.playAnimation()
+                    binding.screenLayout.gone()
                 }
-            })
+                Resource.Status.SUCCESS -> {
+                    binding.lottieLoading.cancelAnimation()
+                    binding.lottieLoading.gone()
+                    binding.screenLayout.show()
+                    viewModel.restaurantList = response.data?.restaurantList
+                    setRestaurantsForRestaurantAdapter(viewModel.restaurantList)
+                }
+                Resource.Status.ERROR -> {
+                    binding.lottieLoading.gone()
+                    Toast.makeText(
+                        requireContext(),
+                        "Network Error",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        })
+    }
+
+    private fun getRestaurantByCategories(currentPosition: Int) {
+        if (currentPosition == 0) {
+            getRestaurantsForAPI()
+        } else {
+            viewModel.getRestaurantByCuisine(viewModel.getCategories()[currentPosition].categoryName)
+                .observe(viewLifecycleOwner, { response ->
+                    viewModel.restaurantList = response.data?.restaurantList
+                    setRestaurantsForRestaurantAdapter(response.data?.restaurantList)
+                })
         }
     }
 
-    private fun setRestaurants(restaurantList: List<Restaurant>?) {
-        isRestaurantListVisible(restaurantList.isNullOrEmpty().not())
+    private fun setRestaurantsForRestaurantAdapter(restaurantList: List<Restaurant>?) {
         restaurantsAdapter.setData(restaurantList)
-        binding.listRestaurantRestaurantsRecyclerView.adapter = restaurantsAdapter
+        binding.restaurantRecyclerView.adapter = restaurantsAdapter
     }
 
-    private fun isRestaurantListVisible(isVisible: Boolean) {
-        binding.progressBar.gone()
-        binding.listRestaurantRestaurantsRecyclerView.isVisible = isVisible
+    private fun getUserForAPI() {
+        viewModel.getUser().observe(viewLifecycleOwner, {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    Log.v("getUser", "Loading")
+                }
+                Resource.Status.SUCCESS -> {
+                    val userData = it.data!!.user
+                    currentRole = userData!!.role
+
+                    isAdmin(currentRole)
+                }
+                Resource.Status.ERROR -> {
+                    Log.v("getUser", "Error")
+                }
+            }
+        })
+    }
+
+    private fun isAdmin(currentRole: String) {
+        if(currentRole == "admin"){
+            binding.restaurantAddButton.show()
+        }else {
+            binding.restaurantAddButton.hide()
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        categoriesAdapter.removeListeners()
     }
 
     override fun onClick(position: Int) {
-        getCategoriesByRestaurants(position)
+        getRestaurantByCategories(position)
     }
 }

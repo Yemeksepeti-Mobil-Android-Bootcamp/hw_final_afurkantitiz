@@ -5,177 +5,168 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-       <ProgressBar
-           android:id="@+id/progressBar"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           android:visibility="gone"
-           app:layout_constraintTop_toTopOf="parent" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading_lottie" />
 
-       <androidx.coordinatorlayout.widget.CoordinatorLayout
-           android:id="@+id/mainLayout"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:backgroundTint="#FF0036"
-           tools:context=".ui.restaurant.RestaurantFragment">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/screenLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/dark_purple">
 
-              <com.google.android.material.appbar.AppBarLayout
-                  android:id="@+id/appBarLayout"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:background="@drawable/background_non_radius"
-                  android:fitsSystemWindows="true">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_background_bottom_radius"
+            android:fitsSystemWindows="true">
 
-                     <com.google.android.material.appbar.CollapsingToolbarLayout
-                         android:id="@+id/collapsingToolbarLayout"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:backgroundTint="#FF0036"
-                         android:fitsSystemWindows="true"
-                         app:contentScrim="#FF0036"
-                         app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/dark_purple"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@color/dark_purple"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="bottom"
-                                android:layout_marginBottom="?android:attr/actionBarSize">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="?android:attr/actionBarSize">
 
-                                   <androidx.appcompat.widget.AppCompatImageButton
-                                       android:id="@+id/backButton"
-                                       android:layout_width="wrap_content"
-                                       android:layout_height="wrap_content"
-                                       android:background="@null"
-                                       app:layout_constraintTop_toTopOf="parent"
-                                       app:layout_constraintLeft_toLeftOf="parent"
-                                       android:layout_margin="@dimen/_16sdp"
-                                       android:src="@drawable/ic_baseline_arrow_back"/>
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/backButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_16sdp"
+                        android:background="@null"
+                        android:contentDescription="@string/back_button"
+                        android:src="@drawable/ic_back"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                                   <androidx.appcompat.widget.AppCompatImageView
-                                       android:id="@+id/imageView"
-                                       android:layout_width="@dimen/_200sdp"
-                                       android:layout_height="@dimen/_100sdp"
-                                       android:scaleType="centerCrop"
-                                       android:layout_marginTop="@dimen/_36sdp"
-                                       android:layout_marginBottom="@dimen/_20sdp"
-                                       app:layout_constraintBottom_toBottomOf="parent"
-                                       app:layout_constraintEnd_toEndOf="parent"
-                                       app:layout_constraintStart_toStartOf="parent"
-                                       app:layout_constraintTop_toTopOf="parent"
-                                       tools:src="@drawable/custom_button" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="@dimen/_100sdp"
+                        android:layout_marginTop="@dimen/_36sdp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <androidx.appcompat.widget.Toolbar
-                                android:id="@+id/toolbar"
-                                android:layout_width="match_parent"
-                                android:layout_height="?android:attr/actionBarSize"
-                                android:layout_gravity="bottom"
-                                android:background="@drawable/background_non_radius"
-                                app:layout_collapseMode="pin">
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/gradient_background_bottom_radius"
+                    app:layout_collapseMode="pin">
 
-                                   <androidx.appcompat.widget.AppCompatTextView
-                                       android:id="@+id/mealNameTextView"
-                                       android:layout_width="match_parent"
-                                       android:layout_height="wrap_content"
-                                       android:fontFamily="@font/poppins_regular"
-                                       android:textAlignment="center"
-                                       android:textColor="@color/white"
-                                       android:textSize="20sp"
-                                       android:textStyle="bold"
-                                       tools:text="Meal Name" />
-                            </androidx.appcompat.widget.Toolbar>
-                     </com.google.android.material.appbar.CollapsingToolbarLayout>
-              </com.google.android.material.appbar.AppBarLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/mealNameTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="Meal Name" />
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-              <androidx.constraintlayout.widget.ConstraintLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:padding="@dimen/_16sdp"
-                  app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="476dp"
+            android:padding="@dimen/_16sdp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-                     <LinearLayout
-                         android:id="@+id/linearLayout2"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:orientation="vertical"
-                         app:layout_constraintEnd_toEndOf="parent"
-                         app:layout_constraintStart_toStartOf="parent"
-                         app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:id="@+id/descriptionLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_semi_bold"
-                                android:text="Description"
-                                android:textColor="@color/gray1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="@string/description"
+                    android:textColor="@color/dark_gray" />
 
-                            <TextView
-                                android:id="@+id/mealDescription"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_regular"
-                                tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"
-                                android:textColor="@color/black" />
-                     </LinearLayout>
+                <TextView
+                    android:id="@+id/mealDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/black"
+                    tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," />
+            </LinearLayout>
 
 
-                     <androidx.recyclerview.widget.RecyclerView
-                         android:id="@+id/ingredientsRecyclerView"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginTop="@dimen/_16sdp"
-                         app:layout_constraintEnd_toEndOf="parent"
-                         app:layout_constraintStart_toStartOf="parent"
-                         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ingredientsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionLayout" />
 
-                     <LinearLayout
-                         android:id="@+id/linearLayout"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:layout_marginTop="@dimen/_16sdp"
-                         android:orientation="horizontal"
-                         app:layout_constraintEnd_toEndOf="parent"
-                         app:layout_constraintTop_toBottomOf="@+id/ingredientsRecyclerView">
+            <TextView
+                android:id="@+id/mealPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="21dp"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="16"
+                android:textColor="@color/dark_purple"
+                android:textSize="@dimen/_18ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientsRecyclerView" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_semi_bold"
-                                android:text="$"
-                                android:textColor="@color/red"
-                                android:textSize="@dimen/_18ssp" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/addToCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/gradient_background_all_radius_button"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:paddingHorizontal="@dimen/_20sdp"
+                android:paddingVertical="@dimen/_12sdp"
+                android:text="@string/add_to_cart"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredientsRecyclerView" />
 
-                            <TextView
-                                android:id="@+id/mealPrice"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_4sdp"
-                                android:fontFamily="@font/poppins_bold"
-                                tools:text="5.99"
-                                android:textColor="@color/red"
-                                android:textSize="@dimen/_18ssp" />
-                     </LinearLayout>
-              </androidx.constraintlayout.widget.ConstraintLayout>
-       </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-       <androidx.cardview.widget.CardView
-           android:id="@+id/addToCart"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_margin="@dimen/_16sdp"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent">
-
-              <TextView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Add to Cart"
-                  android:textSize="@dimen/_16ssp" />
-       </androidx.cardview.widget.CardView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

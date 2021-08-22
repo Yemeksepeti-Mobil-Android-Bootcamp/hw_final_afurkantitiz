@@ -1,5 +1,6 @@
 package com.afurkantitiz.foodapp.ui.authentication.signup
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -35,10 +36,10 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        onClick()
+        onClickListener()
     }
 
-    private fun onClick() {
+    private fun onClickListener() {
         binding.signUpGoToSignInButton.setOnClickListener {
             findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
         }
@@ -48,25 +49,37 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    private fun signUp(){
+    private fun signUp() {
         val name = binding.signUpNameEditText.text.toString()
         val email = binding.signUpEmailEditText.text.toString()
         val password = binding.signUpPasswordEditText.text.toString()
-        val imageUrl = "https://e7.pngegg.com/pngimages/981/645/png-clipart-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette-thumbnail.png"
 
-        viewModel.register(name, email, password, imageUrl).observe(viewLifecycleOwner, {
+        viewModel.register(name, email, password).observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    binding.progressBar.show()
+                    binding.lottieLoading.show()
+                    binding.lottieLoading.playAnimation()
+                    binding.screenLayout.gone()
                 }
                 Resource.Status.SUCCESS -> {
-                    binding.progressBar.gone()
+                    binding.lottieLoading.cancelAnimation()
+                    binding.lottieLoading.gone()
+                    binding.screenLayout.gone()
+
                     val intent = Intent(context, MainActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()
                 }
                 Resource.Status.ERROR -> {
-                    binding.progressBar.show()
+                    binding.lottieLoading.gone()
+
+                    val dialog = AlertDialog.Builder(context)
+                        .setTitle("Network Error")
+                        .setMessage("${it.message}")
+                        .setPositiveButton("ok") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                    dialog.show()
                 }
             }
         })

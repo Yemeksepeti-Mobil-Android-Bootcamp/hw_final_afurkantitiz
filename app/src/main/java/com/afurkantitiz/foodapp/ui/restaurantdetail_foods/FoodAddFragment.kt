@@ -1,13 +1,12 @@
 package com.afurkantitiz.foodapp.ui.restaurantdetail_foods
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.afurkantitiz.foodapp.data.entity.food.Ingredient
 import com.afurkantitiz.foodapp.databinding.FragmentFoodAddBinding
 import com.afurkantitiz.foodapp.utils.Resource
@@ -43,26 +42,30 @@ class FoodAddFragment(restaurantId: String) : BottomSheetDialogFragment() {
 
         initializeIngredients()
         addIngredients()
+        onClickListener()
+    }
+
+    private fun onClickListener() {
         binding.addMealButton.setOnClickListener {
             addMeal()
         }
 
-        Log.v("restId", restId)
-
+        binding.addMealIngredientLogo.setOnClickListener {
+            addIngredients()
+        }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun addIngredients() {
-        binding.addMealIngredientLogo.setOnClickListener {
-            if (!binding.mealIngredientsEditText.text.isNullOrEmpty()) {
-                ingredientsList.add(
-                    Ingredient(
-                        binding.mealIngredientsEditText.text.toString(),
-                        true
-                    )
+        if (!binding.mealIngredientsEditText.text.isNullOrEmpty()) {
+            ingredientsList.add(
+                Ingredient(
+                    binding.mealIngredientsEditText.text.toString(),
+                    true
                 )
-                ingredientAdapter.notifyDataSetChanged()
-                binding.mealIngredientsEditText.text!!.clear()
-            }
+            )
+            ingredientAdapter.notifyDataSetChanged()
+            binding.mealIngredientsEditText.text!!.clear()
         }
     }
 
@@ -111,6 +114,7 @@ class FoodAddFragment(restaurantId: String) : BottomSheetDialogFragment() {
         layoutManager.alignItems = AlignItems.FLEX_START
 
         ingredientAdapter.addListener(object : IIngredientOnClick {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onIngredientClickListener(ingredient: Ingredient, position: Int) {
                 ingredientsList.removeAt(position)
                 ingredientAdapter.notifyDataSetChanged()

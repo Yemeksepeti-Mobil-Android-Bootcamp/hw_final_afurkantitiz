@@ -38,7 +38,6 @@
                 android:layout_height="wrap_content"
                 tools:text="Herbal Pancake"
                 android:textSize="@dimen/_16ssp"
-                android:fontFamily="@font/benton_sans_bold"
                 android:textColor="@color/black" />
         </LinearLayout>
 
@@ -62,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semi_bold"
                     android:text="Quantity Count : "
-                    android:textColor="@color/gray1"
+                    android:textColor="@color/dark_gray"
                     android:textSize="@dimen/_12ssp" />
 
                 <TextView
@@ -70,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semi_bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_gray"
                     android:textSize="@dimen/_16ssp"
                     tools:text="1" />
             </LinearLayout>
@@ -90,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semi_bold"
                     android:text="Order Date : "
-                    android:textColor="@color/gray1"
+                    android:textColor="@color/dark_gray"
                     android:textSize="@dimen/_12ssp" />
 
                 <TextView
@@ -98,9 +97,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semi_bold"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp"
-                    tools:text="Herbal Pancake" />
+                    android:textColor="#2E2828"
+                    android:textSize="@dimen/_16ssp"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

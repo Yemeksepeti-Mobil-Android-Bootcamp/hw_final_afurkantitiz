@@ -1,15 +1,12 @@
 package com.afurkantitiz.foodapp.ui.home
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.afurkantitiz.foodapp.R
@@ -39,8 +36,8 @@ class RestaurantAddFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initializeCuisine()
-        initializePayment()
+        initializeCuisineSpinner()
+        initializePaymentSpinner()
         setOnclickListener()
     }
 
@@ -52,6 +49,8 @@ class RestaurantAddFragment : BottomSheetDialogFragment() {
 
     private fun addRestaurant() {
         val name = binding.restaurantNameEditText.editText?.text.toString()
+        val image = binding.restaurantImageEditText.editText?.text.toString()
+        val district = binding.restaurantDistrictEditText.editText?.text.toString()
         val cuisine = binding.cuisineSpinner.selectedItem.toString()
         val deliveryInfo = binding.restaurantDeliveryInfoEditText.editText?.text.toString()
         val deliveryTime = binding.restaurantDeliveryTimeEditText.text.toString()
@@ -59,26 +58,44 @@ class RestaurantAddFragment : BottomSheetDialogFragment() {
         val minDeliveryFee = binding.restaurantDeliveryFeeEditText.text.toString()
         val paymentMethods = binding.multiSelectSpinner.selectedItem.toString()
 
-        viewModel.addRestaurant(name, cuisine, deliveryInfo, deliveryTime, address, "Altınkaya",
-        minDeliveryFee, paymentMethods, 7.0, "https://www.qsrmagazine.com/sites/default/files/styles/story_page/public/popeyes.jpg?itok=mSr5gG37").observe(viewLifecycleOwner, {
+        viewModel.addRestaurant(
+            name,
+            cuisine,
+            deliveryInfo,
+            deliveryTime,
+            address,
+            district,
+            minDeliveryFee,
+            paymentMethods,
+            7.0,
+            image
+        ).observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    binding.progressBar.show()
+                    binding.lottieLoading.show()
+                    binding.lottieLoading.playAnimation()
+                    binding.screenLayout.gone()
                 }
                 Resource.Status.SUCCESS -> {
-                    binding.progressBar.gone()
+                    binding.lottieLoading.cancelAnimation()
+                    binding.lottieLoading.gone()
+                    binding.screenLayout.show()
                     this.dismiss()
                     findNavController().navigate(R.id.action_restaurantsFragment_self)
                 }
                 Resource.Status.ERROR -> {
-                    binding.progressBar.gone()
-                    Toast.makeText(context, "Operation Failed", Toast.LENGTH_LONG).show()
+                    binding.lottieLoading.gone()
+                    Toast.makeText(
+                        requireContext(),
+                        "Network Error",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         })
     }
 
-    private fun initializeCuisine() {
+    private fun initializeCuisineSpinner() {
         val cities = resources.getStringArray(R.array.Cuisines)
         val adapter = ArrayAdapter(
             activity as AppCompatActivity,
@@ -88,7 +105,7 @@ class RestaurantAddFragment : BottomSheetDialogFragment() {
         binding.cuisineSpinner.adapter = adapter
     }
 
-    private fun initializePayment() {
+    private fun initializePaymentSpinner() {
         val paymentMethods = resources.getStringArray(R.array.RestaurantPaymentMethods)
         val adapter = ArrayAdapter(
             activity as AppCompatActivity,

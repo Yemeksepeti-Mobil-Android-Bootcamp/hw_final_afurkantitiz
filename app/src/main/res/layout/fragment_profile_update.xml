@@ -1,40 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.profile.ProfileUpdateFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        tools:context=".ui.profile.ProfileUpdateFragment">
+        android:layout_height="wrap_content">
 
-        <ProgressBar
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieLoading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_margin="@dimen/_16sdp"
             android:visibility="gone"
-            android:id="@+id/progressBar" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading_lottie" />
 
         <LinearLayout
-            android:id="@+id/layout"
+            android:id="@+id/screenLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <View
-                android:layout_width="100dp"
-                android:layout_height="1dp"
-                android:background="@color/black"
-                android:layout_gravity="center_horizontal" />
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/black" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Name">
+                android:layout_marginTop="@dimen/_16sdp"
+                android:hint="@string/name">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nameEditText"
@@ -43,11 +56,25 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/imageLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Email">
+                android:layout_marginTop="@dimen/_16sdp"
+                android:hint="@string/image_url">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/imageEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:hint="@string/email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailEditText"
@@ -59,8 +86,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Phone">
+                android:layout_marginTop="@dimen/_16sdp"
+                android:hint="@string/phone">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phoneEditText"
@@ -72,8 +99,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Address">
+                android:layout_marginTop="@dimen/_16sdp"
+                android:hint="@string/address">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/addressEditText"
@@ -85,8 +112,10 @@
                 android:id="@+id/updateButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Update Profile" />
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/update_profile" />
         </LinearLayout>
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

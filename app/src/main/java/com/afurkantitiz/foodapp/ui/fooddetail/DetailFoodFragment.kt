@@ -1,10 +1,12 @@
 package com.afurkantitiz.foodapp.ui.fooddetail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -41,11 +43,15 @@ class DetailFoodFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        getMealDetailForAPI()
+        onClickListener()
+        initViews()
+    }
+
+    private fun initViews() {
         binding.ingredientsRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-        getMealDetails()
-        onClickListener()
     }
 
     private fun onClickListener() {
@@ -54,20 +60,34 @@ class DetailFoodFragment : Fragment() {
         }
     }
 
-    private fun getMealDetails() {
+    @SuppressLint("SetTextI18n")
+    private fun getMealDetailForAPI() {
         viewModel.getMealDetails(args.mealId).observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    binding.progressBar.show()
+                    binding.lottieLoading.show()
+                    binding.lottieLoading.playAnimation()
+                    binding.screenLayout.gone()
                 }
                 Resource.Status.SUCCESS -> {
-                    binding.progressBar.gone()
+                    binding.lottieLoading.cancelAnimation()
+                    binding.lottieLoading.gone()
+                    binding.screenLayout.show()
 
                     val meal = it.data!!.data
                     viewModel.meal = meal
 
-                    cartViewModel = ViewModelProviders.of(requireActivity()).get(CartViewModel::class.java)
-                    val cart = Cart(0, meal.name, args.restaurantName, meal.image, meal.price, args.restaurantId, meal.id)
+                    cartViewModel =
+                        ViewModelProviders.of(requireActivity()).get(CartViewModel::class.java)
+                    val cart = Cart(
+                        0,
+                        meal.name,
+                        args.restaurantName,
+                        meal.image,
+                        meal.price,
+                        args.restaurantId,
+                        meal.id
+                    )
 
                     binding.addToCart.setOnClickListener {
                         cartViewModel.insertCart(cart)
@@ -80,13 +100,18 @@ class DetailFoodFragment : Fragment() {
 
                     binding.mealNameTextView.text = meal.name
                     binding.mealDescription.text = meal.description
-                    binding.mealPrice.text = meal.price
+                    binding.mealPrice.text = meal.price + " $"
 
                     adapter.setIngredientList(meal.ingredients)
                     binding.ingredientsRecyclerView.adapter = adapter
                 }
                 Resource.Status.ERROR -> {
-                    binding.progressBar.show()
+                    binding.lottieLoading.gone()
+                    Toast.makeText(
+                        requireContext(),
+                        "Network Error",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         })

@@ -1,5 +1,6 @@
 package com.afurkantitiz.foodapp.ui.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -8,12 +9,13 @@ import com.afurkantitiz.foodapp.data.entity.restaurant.Restaurant
 import com.afurkantitiz.foodapp.databinding.ItemRestaurantsCardBinding
 import com.bumptech.glide.Glide
 
-class RestaurantsAdapter : RecyclerView.Adapter<RestaurantsAdapter.AllRestaurantsViewHolder>(){
+class RestaurantsAdapter : RecyclerView.Adapter<RestaurantsAdapter.AllRestaurantsViewHolder>() {
 
     private lateinit var restaurantList: List<Restaurant>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllRestaurantsViewHolder {
-        val binding = ItemRestaurantsCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemRestaurantsCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AllRestaurantsViewHolder(binding)
     }
 
@@ -37,6 +39,7 @@ class RestaurantsAdapter : RecyclerView.Adapter<RestaurantsAdapter.AllRestaurant
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(restaurantList: List<Restaurant>?) {
         restaurantList?.let {
             this.restaurantList = restaurantList
@@ -46,5 +49,6 @@ class RestaurantsAdapter : RecyclerView.Adapter<RestaurantsAdapter.AllRestaurant
 
     override fun getItemCount(): Int = restaurantList.size
 
-    inner class AllRestaurantsViewHolder(val binding: ItemRestaurantsCardBinding): RecyclerView.ViewHolder(binding.root)
+    inner class AllRestaurantsViewHolder(val binding: ItemRestaurantsCardBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

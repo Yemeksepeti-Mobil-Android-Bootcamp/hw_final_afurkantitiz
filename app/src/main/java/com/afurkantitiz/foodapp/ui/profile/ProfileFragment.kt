@@ -2,11 +2,11 @@ package com.afurkantitiz.foodapp.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -40,16 +40,9 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getProfileData()
+        getProfileForAPI()
         onClickListener()
         getOrderForAPI()
-
-        binding.logOut.setOnClickListener {
-            viewModel.logOut()
-            val intent = Intent(context, SplashActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
-        }
     }
 
     private fun onClickListener() {
@@ -60,22 +53,35 @@ class ProfileFragment : Fragment() {
         binding.editButton.setOnClickListener {
             val profileUpdateFragment = ProfileUpdateFragment()
             profileUpdateFragment.setStyle(
-                    DialogFragment.STYLE_NORMAL,
-                    R.style.ThemeOverlay_Demo_BottomSheetDialog)
-                profileUpdateFragment.show(requireActivity().supportFragmentManager, "BottomSheetDialog")
+                DialogFragment.STYLE_NORMAL,
+                R.style.ThemeOverlay_Demo_BottomSheetDialog
+            )
+            profileUpdateFragment.show(
+                requireActivity().supportFragmentManager,
+                "BottomSheetDialog"
+            )
+        }
+
+        binding.logOut.setOnClickListener {
+            viewModel.logOut()
+            val intent = Intent(context, SplashActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
         }
     }
 
-    private fun getProfileData() {
+    private fun getProfileForAPI() {
         viewModel.getUser().observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    binding.progressBar.show()
-                    binding.profileLayout.gone()
+                    binding.lottieLoading.show()
+                    binding.lottieLoading.playAnimation()
+                    binding.screenLayout.gone()
                 }
                 Resource.Status.SUCCESS -> {
-                    binding.progressBar.gone()
-                    binding.profileLayout.show()
+                    binding.lottieLoading.cancelAnimation()
+                    binding.lottieLoading.gone()
+                    binding.screenLayout.show()
 
                     val userData = it.data?.user
                     binding.emailAddress.text = userData?.email
@@ -83,31 +89,49 @@ class ProfileFragment : Fragment() {
                     binding.profileName.text = userData?.name
                     binding.telephoneNumber.text = userData?.phone
 
-                    Glide.with(binding.profileImageView.context)
+                    Glide.with(requireContext())
                         .load(userData?.profileImage)
                         .into(binding.profileImageView)
                 }
                 Resource.Status.ERROR -> {
-                    binding.progressBar.show()
+                    binding.lottieLoading.gone()
+                    Toast.makeText(
+                        requireContext(),
+                        "Network Error",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         })
     }
 
-    private fun getOrderForAPI(){
+    private fun getOrderForAPI() {
         viewModel.getOrders().observe(viewLifecycleOwner, { response ->
             when (response.status) {
-                Resource.Status.LOADING -> binding.progressBar.show()
+                Resource.Status.LOADING -> {
+                    binding.lottieOrderLoading.show()
+                    binding.lottieOrderLoading.playAnimation()
+                    binding.ordersRecyclerView.gone()
+                }
                 Resource.Status.SUCCESS -> {
+                    binding.lottieOrderLoading.cancelAnimation()
+                    binding.lottieOrderLoading.gone()
+                    binding.ordersRecyclerView.show()
+
                     response.data?.orderList?.let {
-                        binding.ordersRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                        binding.ordersRecyclerView.layoutManager =
+                            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                         binding.ordersRecyclerView.adapter = adapter
                         adapter.setData(it)
                     }
                 }
                 Resource.Status.ERROR -> {
-                    Log.v("order", "$response")
-                    binding.progressBar.gone()
+                    binding.lottieOrderLoading.gone()
+                    Toast.makeText(
+                        requireContext(),
+                        "Network Error",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         })

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.afurkantitiz.foodapp.data.ApiRepository
 import com.afurkantitiz.foodapp.data.entity.mealadd.MealAddRequest
 import com.afurkantitiz.foodapp.data.entity.mealadd.MealAddResponse
+import com.afurkantitiz.foodapp.data.entity.profile.UserResponse
 import com.afurkantitiz.foodapp.data.entity.restaurant.RestaurantResponse
 import com.afurkantitiz.foodapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,4 +31,6 @@ class DetailRestaurantFoodsViewModel @Inject constructor(
         val request = MealAddRequest(name, imageUrl, description, price, ingredients)
         return apiRepository.postMeal(restaurantId, request)
     }
+
+    fun getUser(): LiveData<Resource<UserResponse>> = apiRepository.getUser()
 }

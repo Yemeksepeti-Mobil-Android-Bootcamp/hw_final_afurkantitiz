@@ -1,7 +1,6 @@
 package com.afurkantitiz.foodapp.ui.profile
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.afurkantitiz.foodapp.data.ApiRepository
 import com.afurkantitiz.foodapp.data.entity.order.OrderListResponse
@@ -14,15 +13,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
     private val apiRepository: ApiRepository
 ) : ViewModel() {
 
     fun getUser(): LiveData<Resource<UserResponse>> = apiRepository.getUser()
 
-    fun updateUser(userRequest: UserRequest): LiveData<Resource<User>> = apiRepository.updateUser(userRequest)
+    fun updateUser(userRequest: UserRequest): LiveData<Resource<User>> =
+        apiRepository.updateUser(userRequest)
 
     fun getOrders(): LiveData<Resource<OrderListResponse>> = apiRepository.getOrder()
 
-    fun logOut() { apiRepository.logOut() }
+    fun logOut() {
+        apiRepository.logOut()
+    }
 }

@@ -3,39 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.profile.ProfileFragment">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading_lottie" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/profileLayout"
+        android:id="@+id/screenLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="#FF0036"
-        tools:context=".ui.profile.ProfileFragment">
+        android:backgroundTint="@color/dark_purple">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_non_radius"
+            android:background="@drawable/gradient_background_bottom_radius"
             android:fitsSystemWindows="true">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsingToolbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#FF0036"
+                android:backgroundTint="@color/dark_purple"
                 android:fitsSystemWindows="true"
-                app:contentScrim="#FF0036"
+                app:contentScrim="@color/dark_purple"
                 app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,29 +52,29 @@
                         android:id="@+id/backButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
                         android:layout_margin="@dimen/_16sdp"
-                        android:src="@drawable/ic_baseline_arrow_back"/>
+                        android:background="@null"
+                        android:src="@drawable/ic_back"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/editButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_margin="@dimen/_16sdp"
-                        android:src="@drawable/ic_baseline_edit" />
+                        android:background="@null"
+                        android:src="@drawable/ic_edit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/logOut"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_16sdp"
                         android:background="@null"
-                        android:src="@drawable/ic_baseline_call_missed_outgoing_24"
+                        android:layout_margin="@dimen/_16sdp"
+                        android:src="@drawable/ic_logout"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/editButton" />
 
@@ -83,16 +87,16 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/backButton"
-                        tools:src="@drawable/custom_button" />
+                        tools:src="@drawable/user" />
 
                     <TextView
                         android:id="@+id/emailAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_16sdp"
                         android:fontFamily="@font/poppins_semi_bold"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12ssp"
-                        android:layout_marginTop="@dimen/_16sdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/profileImageView"
@@ -108,8 +112,7 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/emailAddress"
-                        tools:text="Samsun" />
+                        app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
 
                     <TextView
                         android:id="@+id/telephoneNumber"
@@ -122,8 +125,7 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/emailAddress"
-                        tools:text="05432100000" />
+                        app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.Toolbar
@@ -131,7 +133,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?android:attr/actionBarSize"
                     android:layout_gravity="bottom"
-                    android:background="@drawable/background_non_radius"
+                    android:background="@drawable/gradient_background_bottom_radius"
                     app:layout_collapseMode="pin">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -154,6 +156,20 @@
             android:padding="@dimen/_16sdp"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieOrderLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_16sdp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loading_lottie" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ordersRecyclerView"
                 android:layout_width="match_parent"
@@ -162,5 +178,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

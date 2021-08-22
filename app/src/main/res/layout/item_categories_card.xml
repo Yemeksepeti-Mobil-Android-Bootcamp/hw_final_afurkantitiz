@@ -5,7 +5,6 @@
     android:id="@+id/itemCategoriesCardView"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
-    app:strokeColor="@color/gray"
     app:cardCornerRadius="@dimen/_15sdp"
     app:strokeWidth="1.5dp"
     android:layout_margin="@dimen/_8sdp"
@@ -23,8 +22,7 @@
         <ImageView
             android:id="@+id/itemCategoriesImageView"
             android:layout_width="50dp"
-            android:layout_height="50dp"
-            tools:src="@drawable/photo_restaurant"/>
+            android:layout_height="50dp"/>
 
         <TextView
             android:id="@+id/itemCategoriesName"

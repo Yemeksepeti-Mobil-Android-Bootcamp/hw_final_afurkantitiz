@@ -14,7 +14,7 @@ import javax.inject.Inject
 class SignInViewModel @Inject constructor(
     var savedStateHandle: SavedStateHandle,
     private var apiRepository: ApiRepository
-): ViewModel(){
+) : ViewModel() {
 
     fun signIn(email: String, password: String): LiveData<Resource<SignInResponse>> {
         val request = SignInRequest(email, password)

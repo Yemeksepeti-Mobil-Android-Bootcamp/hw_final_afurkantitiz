@@ -39,7 +39,6 @@
                 android:layout_height="wrap_content"
                 tools:text="Herbal Pancake"
                 android:textSize="@dimen/_16ssp"
-                android:fontFamily="@font/benton_sans_bold"
                 android:textColor="@color/black" />
 
             <TextView
@@ -48,7 +47,6 @@
                 android:layout_height="wrap_content"
                 tools:text="Warung Herbal"
                 android:textSize="@dimen/_14ssp"
-                android:fontFamily="@font/benton_sans_medium"
                 android:textColor="#8E8888" />
         </LinearLayout>
 
@@ -61,7 +59,6 @@
             tools:text="$7"
             android:layout_marginEnd="@dimen/_8sdp"
             android:textSize="@dimen/_20ssp"
-            android:textColor="#FEAD1D"
-            android:fontFamily="@font/benton_sans_bold"/>
+            android:textColor="#FEAD1D"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
