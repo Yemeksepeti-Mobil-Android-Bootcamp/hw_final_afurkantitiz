@@ -80,4 +80,8 @@ class ApiRepository @Inject constructor(
         performNetworkOperation {
             remoteDataSource.postMeal(restaurantId, request = mealAddRequest)
         }
+
+    fun logOut() {
+        localDataSource.saveToken("")
+    }
 }

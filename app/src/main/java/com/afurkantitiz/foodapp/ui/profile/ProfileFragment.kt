@@ -1,5 +1,6 @@
 package com.afurkantitiz.foodapp.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afurkantitiz.foodapp.R
 import com.afurkantitiz.foodapp.databinding.FragmentProfileBinding
+import com.afurkantitiz.foodapp.ui.SplashActivity
 import com.afurkantitiz.foodapp.utils.Resource
 import com.afurkantitiz.foodapp.utils.gone
 import com.afurkantitiz.foodapp.utils.show
@@ -41,6 +43,13 @@ class ProfileFragment : Fragment() {
         getProfileData()
         onClickListener()
         getOrderForAPI()
+
+        binding.logOut.setOnClickListener {
+            viewModel.logOut()
+            val intent = Intent(context, SplashActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
     }
 
     private fun onClickListener() {

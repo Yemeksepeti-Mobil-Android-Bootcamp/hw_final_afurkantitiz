@@ -23,4 +23,6 @@ class ProfileViewModel @Inject constructor(
     fun updateUser(userRequest: UserRequest): LiveData<Resource<User>> = apiRepository.updateUser(userRequest)
 
     fun getOrders(): LiveData<Resource<OrderListResponse>> = apiRepository.getOrder()
+
+    fun logOut() { apiRepository.logOut() }
 }
