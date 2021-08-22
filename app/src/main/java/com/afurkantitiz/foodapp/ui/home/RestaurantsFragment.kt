@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afurkantitiz.foodapp.R
 import com.afurkantitiz.foodapp.data.entity.restaurant.Restaurant
-import com.afurkantitiz.foodapp.databinding.FragmentListRestaurantsBinding
+import com.afurkantitiz.foodapp.databinding.FragmentRestaurantsBinding
 import com.afurkantitiz.foodapp.utils.Resource
 import com.afurkantitiz.foodapp.utils.gone
 import com.afurkantitiz.foodapp.utils.show
@@ -19,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RestaurantsFragment : Fragment(), ICategoriesOnClick {
-    private var _binding: FragmentListRestaurantsBinding? = null
+    private var _binding: FragmentRestaurantsBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: RestaurantsViewModel by viewModels()
@@ -31,7 +33,7 @@ class RestaurantsFragment : Fragment(), ICategoriesOnClick {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentListRestaurantsBinding.inflate(inflater, container, false)
+        _binding = FragmentRestaurantsBinding.inflate(inflater, container, false)
 
         initViews()
 
@@ -40,6 +42,14 @@ class RestaurantsFragment : Fragment(), ICategoriesOnClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.restaurantAddButton.setOnClickListener {
+            val restaurantAddFragment = RestaurantAddFragment()
+            restaurantAddFragment.setStyle(
+                DialogFragment.STYLE_NORMAL,
+                R.style.ThemeOverlay_Demo_BottomSheetDialog)
+            restaurantAddFragment.show(requireActivity().supportFragmentManager, "RestaurantAddBottomSheet")
+        }
 
         getRestaurants()
         onSearchViewListener()

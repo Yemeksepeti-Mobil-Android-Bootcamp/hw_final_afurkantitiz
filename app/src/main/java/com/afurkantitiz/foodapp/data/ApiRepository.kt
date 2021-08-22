@@ -1,7 +1,9 @@
 package com.afurkantitiz.foodapp.data
 
 import com.afurkantitiz.foodapp.data.entity.cart.CartRequest
+import com.afurkantitiz.foodapp.data.entity.mealadd.MealAddRequest
 import com.afurkantitiz.foodapp.data.entity.profile.UserRequest
+import com.afurkantitiz.foodapp.data.entity.restaurantadd.RestaurantAddRequest
 import com.afurkantitiz.foodapp.data.entity.signin.SignInRequest
 import com.afurkantitiz.foodapp.data.entity.signup.SignUpRequest
 import com.afurkantitiz.foodapp.data.local.LocalDataSource
@@ -42,6 +44,11 @@ class ApiRepository @Inject constructor(
             remoteDataSource.getRestaurants()
         }
 
+    fun postRestaurant(restaurantAddRequest: RestaurantAddRequest) =
+        performNetworkOperation {
+            remoteDataSource.postRestaurant(request = restaurantAddRequest)
+        }
+
     fun getRestaurantById(id: String) =
         performNetworkOperation {
             remoteDataSource.getRestaurantById(id)
@@ -67,5 +74,10 @@ class ApiRepository @Inject constructor(
 
     fun getOrder() = performNetworkOperation {
             remoteDataSource.getOrders()
+        }
+
+    fun postMeal(restaurantId: String, mealAddRequest: MealAddRequest) =
+        performNetworkOperation {
+            remoteDataSource.postMeal(restaurantId, request = mealAddRequest)
         }
 }

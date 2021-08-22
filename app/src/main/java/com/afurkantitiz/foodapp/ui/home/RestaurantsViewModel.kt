@@ -7,6 +7,8 @@ import com.afurkantitiz.foodapp.data.ApiRepository
 import com.afurkantitiz.foodapp.data.entity.Categories
 import com.afurkantitiz.foodapp.data.entity.restaurant.Restaurant
 import com.afurkantitiz.foodapp.data.entity.restaurant.RestaurantListResponse
+import com.afurkantitiz.foodapp.data.entity.restaurantadd.RestaurantAddRequest
+import com.afurkantitiz.foodapp.data.entity.restaurantadd.RestaurantAddResponse
 import com.afurkantitiz.foodapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -50,5 +52,25 @@ class RestaurantsViewModel @Inject constructor(
                 filterList.add(restaurant)
         }
         return filterList
+    }
+
+    fun addRestaurant(
+        name: String,
+        cuisine: String,
+        deliveryInfo: String,
+        deliveryTime: String,
+        address: String,
+        district: String,
+        minDeliveryFee: String,
+        paymentMethods: String,
+        rating: Double,
+        imageUrl: String
+        ): LiveData<Resource<RestaurantAddResponse>> {
+
+        val request = RestaurantAddRequest(
+            name, cuisine, deliveryInfo, deliveryTime, address, district, minDeliveryFee, paymentMethods, rating, imageUrl)
+
+        return apiRepository.postRestaurant(request)
+
     }
 }

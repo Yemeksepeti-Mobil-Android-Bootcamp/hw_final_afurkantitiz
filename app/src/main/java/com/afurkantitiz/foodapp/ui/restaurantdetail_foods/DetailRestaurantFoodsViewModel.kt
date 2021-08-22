@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.afurkantitiz.foodapp.data.ApiRepository
+import com.afurkantitiz.foodapp.data.entity.mealadd.MealAddRequest
+import com.afurkantitiz.foodapp.data.entity.mealadd.MealAddResponse
 import com.afurkantitiz.foodapp.data.entity.restaurant.RestaurantResponse
 import com.afurkantitiz.foodapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,4 +18,16 @@ class DetailRestaurantFoodsViewModel @Inject constructor(
 ) : ViewModel() {
     fun getRestaurantDetail(id: String): LiveData<Resource<RestaurantResponse>> =
         apiRepository.getRestaurantById(id)
+
+    fun addMeal(
+        restaurantId: String,
+        name: String,
+        imageUrl: String,
+        price: Double,
+        ingredients: List<String>,
+        description: String
+    ): LiveData<Resource<MealAddResponse>> {
+        val request = MealAddRequest(name, imageUrl, description, price, ingredients)
+        return apiRepository.postMeal(restaurantId, request)
+    }
 }

@@ -103,13 +103,21 @@
             android:id="@+id/listRestaurantRestaurantsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_16sdp"
-            android:layout_marginVertical="@dimen/_16sdp"
+            android:layout_margin="@dimen/_16sdp"
             android:fontFamily="@font/benton_sans_bold"
             android:text="Restaurants"
             android:textColor="@color/black"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoryRecyclerView" />
+
+        <ImageView
+            android:id="@+id/restaurantAddButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_add"
+            android:layout_margin="@dimen/_16sdp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/categoryRecyclerView" />
 
         <androidx.recyclerview.widget.RecyclerView

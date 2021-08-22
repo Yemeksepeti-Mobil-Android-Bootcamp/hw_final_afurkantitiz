@@ -51,4 +51,15 @@
         <item>Dessert</item>
         <item>Eastern Kitchen</item>
     </string-array>
+
+    <string-array name="RestaurantPaymentMethods">
+        <item>Online Credit/Bank Card</item>
+        <item>Credit Card</item>
+        <item>Cash</item>
+        <item>Ticket Restaurant</item>
+        <item>Sodexo Restaurant Pass</item>
+        <item>Multinet</item>
+        <item>SetCard</item>
+    </string-array>
+
 </resources>

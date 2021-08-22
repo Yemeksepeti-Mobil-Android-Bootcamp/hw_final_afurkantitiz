@@ -19,9 +19,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import android.content.Context.MODE_PRIVATE
 
 import android.content.SharedPreferences
-
-
-
+import androidx.fragment.app.DialogFragment
+import com.afurkantitiz.foodapp.R
+import com.afurkantitiz.foodapp.ui.home.RestaurantAddFragment
 
 @AndroidEntryPoint
 class DetailRestaurantFoodsFragment : Fragment() {
@@ -52,6 +52,14 @@ class DetailRestaurantFoodsFragment : Fragment() {
     private fun onClick() {
         binding.backButton.setOnClickListener {
             it.findNavController().popBackStack()
+        }
+
+        binding.addFoodButton.setOnClickListener {
+            val foodAddFragment = FoodAddFragment(restaurantId = args.restaurantId)
+            foodAddFragment.setStyle(
+                DialogFragment.STYLE_NORMAL,
+                R.style.ThemeOverlay_Demo_BottomSheetDialog)
+            foodAddFragment.show(requireActivity().supportFragmentManager, "RestaurantAddBottomSheet")
         }
     }
 

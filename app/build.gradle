@@ -101,4 +101,7 @@ dependencies {
 
     //Carousel View
     implementation 'com.synnapps:carouselview:0.1.5'
+
+    //Flexbox
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 }

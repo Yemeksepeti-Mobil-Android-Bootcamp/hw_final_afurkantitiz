@@ -10,6 +10,7 @@ import com.afurkantitiz.foodapp.data.entity.cart.CartRequest
 import com.afurkantitiz.foodapp.data.entity.cart.CartResponse
 import com.afurkantitiz.foodapp.data.local.RoomDb
 import com.afurkantitiz.foodapp.utils.Resource
+import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -37,5 +38,11 @@ class CartViewModel@Inject constructor(
         foodId: ArrayList<String>) :LiveData<Resource<CartResponse>>{
         val request = CartRequest(restaurantId, foodId)
         return apiRepository.postOrders(request)
+    }
+
+    fun deleteCart(cartList: ArrayList<Cart>){
+        val cartDao = RoomDb.getAppDatabase(app)?.cartDao()
+        cartDao?.deleteCart(cartList)
+        getAllCart()
     }
 }

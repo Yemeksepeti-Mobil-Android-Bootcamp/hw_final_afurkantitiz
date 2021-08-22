@@ -1,7 +1,9 @@
 package com.afurkantitiz.foodapp.data.remote
 
 import com.afurkantitiz.foodapp.data.entity.cart.CartRequest
+import com.afurkantitiz.foodapp.data.entity.mealadd.MealAddRequest
 import com.afurkantitiz.foodapp.data.entity.profile.UserRequest
+import com.afurkantitiz.foodapp.data.entity.restaurantadd.RestaurantAddRequest
 import com.afurkantitiz.foodapp.data.entity.signin.SignInRequest
 import com.afurkantitiz.foodapp.data.entity.signup.SignUpRequest
 import com.afurkantitiz.foodapp.utils.BaseDataSource
@@ -18,6 +20,8 @@ class RemoteDataSource @Inject constructor(private val apiService: APIService): 
 
     suspend fun getRestaurants() = getResult { apiService.getRestaurants() }
 
+    suspend fun postRestaurant(request: RestaurantAddRequest) = getResult { apiService.postRestaurant(request) }
+
     suspend fun getRestaurantsByCuisine(cuisine: String) =
         getResult { apiService.getRestaurantsByCuisine(cuisine) }
 
@@ -33,5 +37,9 @@ class RemoteDataSource @Inject constructor(private val apiService: APIService): 
 
     suspend fun postOrders(request: CartRequest) = getResult {
         apiService.postOrders(request)
+    }
+
+    suspend fun postMeal(restaurantId: String, request: MealAddRequest) = getResult {
+        apiService.postMeal(restaurantId, request)
     }
 }

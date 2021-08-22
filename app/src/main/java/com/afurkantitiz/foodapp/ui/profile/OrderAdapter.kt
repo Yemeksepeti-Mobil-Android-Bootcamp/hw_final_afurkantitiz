@@ -33,7 +33,6 @@ class OrderAdapter : RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
             orderRestaurantName.text = order.restaurant.name
             orderQuantityCount.text = order.meals.size.toString()
             orderDate.text = SimpleDateFormat("dd/MM/yyyy").format(order.createdDate).toString()
-//            orderDate.text = order.createdDate
 
             Glide
                .with(holder.binding.orderRestaurantImage.context)

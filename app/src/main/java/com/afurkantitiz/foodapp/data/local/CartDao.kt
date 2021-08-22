@@ -15,5 +15,5 @@ interface CartDao {
     fun insertCart(cart: Cart?)
 
     @Delete
-    fun deleteCart(cart: Cart?)
+    fun deleteCart(cart: ArrayList<Cart>?)
 }

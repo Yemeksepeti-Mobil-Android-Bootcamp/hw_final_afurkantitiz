@@ -30,7 +30,7 @@ class RestaurantsAdapter : RecyclerView.Adapter<RestaurantsAdapter.AllRestaurant
 
         holder.binding.itemRestaurantsCardView.setOnClickListener {
             val action =
-                RestaurantsFragmentDirections.actionListRestaurantsFragmentToDetailRestaurantFragment(
+                RestaurantsFragmentDirections.actionRestaurantsFragmentToDetailRestaurantFragment(
                     allRestaurant.id
                 )
             it.findNavController().navigate(action)

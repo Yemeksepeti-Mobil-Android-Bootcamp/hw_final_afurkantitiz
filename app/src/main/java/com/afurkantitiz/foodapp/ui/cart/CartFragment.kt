@@ -66,7 +66,9 @@ class CartFragment : Fragment() {
                     }
                     Resource.Status.SUCCESS -> {
                         binding.progressBar.gone()
+                        viewModel.deleteCart(viewModel.allCarts)
                         Toast.makeText(requireContext(), "Cart Confirm Success", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.action_cartFragment_self)
                     }
                     Resource.Status.ERROR -> {
                         binding.progressBar.show()
