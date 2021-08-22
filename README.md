@@ -1,9 +1,5 @@
 # Yemeksepeti Mobile Android Bootcamp Graduation Project.
 
-## About this project
-
-This project is a simple food ordering application. I learned the most used libraries and structures in android applications, in this project
-
 ## Used Technologies
 
 - MVVM Architecture
